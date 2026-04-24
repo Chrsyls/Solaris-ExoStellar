@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Signal Lost | Solaris Exostellar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Manrope:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kPaper: '#EAE6DB',
+                        kRed: '#D63230',
+                        kGold: '#D6A04B',
+                        kDeepBlue: '#0B2744',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Manrope"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0B2744; /* Gelap gulita */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            color: #EAE6DB;
+        }
+        .glass-panel {
+            background: rgba(11, 39, 68, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(214, 50, 48, 0.3);
+            box-shadow: 0 0 40px rgba(214, 50, 48, 0.1);
+        }
+        .rounded-flygo { border-radius: 40px; }
+        
+        /* Teks Error Bolong bergaris merah */
+        .text-outline-red {
+            -webkit-text-stroke: 3px #D63230;
+            color: transparent;
+        }
+        ::selection { background: #D63230; color: #EAE6DB; }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden relative min-h-screen flex flex-col">
+
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-kRed opacity-20 blur-[150px] rounded-full pointer-events-none z-0 animate-pulse-fast"></div>
+
+    <nav class="w-full flex justify-center lg:justify-between items-center py-6 px-8 lg:px-20 relative z-50">
+        <a href="index.html" class="flex items-center gap-2 group cursor-pointer">
+            <span class="text-2xl font-serif font-black tracking-wider uppercase text-kPaper opacity-50 group-hover:opacity-100 transition-opacity">
+                Solaris<span class="text-kRed text-sm align-top">®</span>
+            </span>
+        </a>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center px-4 relative z-10 pb-20">
+        <div class="glass-panel p-10 md:p-20 rounded-flygo text-center max-w-3xl w-full border-t-2 border-t-kRed">
+            
+            <p class="text-kRed font-bold tracking-[0.4em] uppercase text-xs md:text-sm mb-4">Critical System Error</p>
+            
+            <h1 class="text-[6rem] md:text-[10rem] font-sans font-black leading-none text-outline-red tracking-tighter mb-4 opacity-90">
+                404
+            </h1>
+            
+            <h2 class="text-3xl md:text-5xl font-serif text-kPaper mb-6">Lost in the <span class="italic text-kRed">Void</span></h2>
+            
+            <p class="text-kPaper/60 text-base md:text-lg mb-12 leading-relaxed max-w-lg mx-auto">
+                Transmission failed. The orbital coordinates you are searching for do not exist in our star charts, or the route has decayed.
+            </p>
+            
+            <a href="index.html" class="inline-block px-10 py-5 bg-kRed text-white font-bold text-sm tracking-widest uppercase hover:bg-white hover:text-kRed transition-colors duration-300 shadow-[0_0_20px_rgba(214,50,48,0.4)]">
+                Abort & Return to Base ↩
+            </a>
+            
+        </div>
+    </main>
+
+    <footer class="py-8 text-center text-kRed/40 text-[10px] uppercase tracking-widest font-mono absolute bottom-0 w-full z-10">
+        <p>End of transmission.</p>
+    </footer>
+
+</body>
+</html>
