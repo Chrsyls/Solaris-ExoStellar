@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intergalactic | Solaris Exostellar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { kDeep: '#050505', kGold: '#D6A04B', kRed: '#8B0000' },
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Manrope"', 'sans-serif'], mono: ['monospace'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #050505; color: #fff; overflow-x: hidden; }
+        .glitch-effect { text-shadow: 2px 0 #8B0000, -2px 0 #0000ff; animation: glitch 2s infinite; }
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 #8B0000, -2px 0 #0000ff; }
+            5% { text-shadow: -2px 0 #8B0000, 2px 0 #0000ff; }
+            10% { text-shadow: 2px 0 #8B0000, -2px 0 #0000ff; }
+            15% { text-shadow: 0 0 transparent; }
+            100% { text-shadow: 0 0 transparent; }
+        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translate(0, 0); }
+    </style>
+</head>
+<body class="font-sans antialiased bg-[url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-fixed bg-center">
+
+    <div class="fixed inset-0 bg-black/90 z-0"></div>
+
+    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 border-b border-white/5 reveal active">
+        <a href="index.html" class="flex items-center gap-2 group cursor-pointer">
+            <span class="text-xl font-serif font-black tracking-wider uppercase text-white/50">Solaris<span class="text-kRed text-sm">X</span></span>
+        </a>
+        <a href="index.html" class="text-xs font-mono tracking-widest text-white/50 hover:text-kRed transition-colors">[ABORT & RETURN]</a>
+    </nav>
+
+    <main class="min-h-screen flex items-center justify-center px-4 relative z-10">
+        <div class="text-center max-w-2xl reveal">
+            <div class="w-24 h-24 mx-auto mb-8 rounded-full border border-kRed flex items-center justify-center animate-pulse">
+                <span class="text-kRed font-mono font-bold">L-03</span>
+            </div>
+            
+            <p class="text-kRed font-mono tracking-[0.5em] uppercase text-xs mb-4">Top Secret / Classified</p>
+            <h1 class="text-5xl md:text-7xl font-serif font-black mb-6 text-white glitch-effect uppercase tracking-tighter">The Void Between</h1>
+            
+            <div class="border-y border-white/10 py-6 mb-8 text-left">
+                <p class="text-white/50 font-mono text-sm mb-4">> WARNING: You are accessing experimental routing data.</p>
+                <p class="text-white/80 font-mono text-sm leading-relaxed mb-4">> Project Andromeda involves unstable space-folding mechanics. Survival rates are currently redacted. Neural preservation is mandatory before physical transit.</p>
+                <p class="text-kGold font-mono text-sm animate-pulse">> WAITING FOR OVERRIDE CODE...</p>
+            </div>
+
+            <button class="px-8 py-4 bg-transparent border-2 border-kRed text-kRed font-mono font-bold text-xs tracking-widest uppercase hover:bg-kRed hover:text-black transition-all">
+                Request Omega Clearance
+            </button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); }});
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

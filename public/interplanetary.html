@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interplanetary | Solaris Exostellar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { kPaper: '#EAE6DB', kMars: '#C1440E', kDeepBlue: '#0B2744', kDust: '#E3C191' },
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Manrope"', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #EAE6DB; color: #0B2744; overflow-x: hidden; }
+        .glass-panel { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.5); }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translate(0, 0); }
+        .delay-100 { transition-delay: 100ms; } .delay-200 { transition-delay: 200ms; }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel border-b border-white/20 reveal active">
+        <a href="index.html" class="flex items-center gap-2 group cursor-pointer">
+            <span class="text-xl font-serif font-black tracking-wider uppercase text-kDeepBlue">Solaris<span class="text-kMars text-sm">®</span></span>
+        </a>
+        <a href="index.html" class="text-xs font-bold tracking-widest uppercase text-kDeepBlue hover:text-kMars transition-colors">← Back to Hub</a>
+    </nav>
+
+    <main class="pt-32 px-4 lg:px-20 pb-24 max-w-[1400px] mx-auto">
+        <div class="text-center mb-20 reveal">
+            <p class="text-kMars font-bold tracking-[0.3em] uppercase text-xs mb-4">Level 01 Clearance</p>
+            <h1 class="text-5xl lg:text-7xl font-serif font-black mb-6 text-kDeepBlue">The Inner Circle</h1>
+            <p class="text-kDeepBlue/70 max-w-2xl mx-auto leading-relaxed">Perjalanan domestik dalam sistem tata surya Sol. Rute komersial yang telah stabil dengan tingkat keamanan maksimum. Cocok untuk liburan akhir pekan atau pemindahan tugas korporat.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-[40px] p-8 border border-kDeepBlue/10 shadow-lg reveal delay-100 group overflow-hidden relative">
+                <div class="w-full h-[250px] rounded-[20px] overflow-hidden mb-6">
+                    <img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-3xl font-serif font-bold">Mars Colony V</h2>
+                    <span class="px-3 py-1 bg-kMars/10 text-kMars text-[10px] font-bold uppercase tracking-widest rounded-full">Routine</span>
+                </div>
+                <p class="text-kDeepBlue/60 text-sm mb-6">Pusat industri dan agrikultur ekstraterestrial terbesar. Waktu tempuh hanya 3 minggu dengan mesin ion generasi ke-4.</p>
+                <button class="w-full py-4 border-2 border-kDeepBlue text-kDeepBlue hover:bg-kDeepBlue hover:text-kPaper font-bold text-sm tracking-widest uppercase rounded-full transition-colors">View Schedule</button>
+            </div>
+
+            <div class="bg-kDeepBlue text-kPaper rounded-[40px] p-8 shadow-lg reveal delay-200 group overflow-hidden relative">
+                <div class="w-full h-[250px] rounded-[20px] overflow-hidden mb-6">
+                    <img src="https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80">
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-3xl font-serif font-bold">Europa Deep</h2>
+                    <span class="px-3 py-1 bg-white/10 text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Research</span>
+                </div>
+                <p class="text-kPaper/60 text-sm mb-6">Eksplorasi lautan sub-glasial di bulan Jupiter. Diperlukan sertifikasi penyelaman laut dalam tingkat 3.</p>
+                <button class="w-full py-4 border-2 border-kPaper text-kPaper hover:bg-kPaper hover:text-kDeepBlue font-bold text-sm tracking-widest uppercase rounded-full transition-colors">Request Access</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); }});
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
