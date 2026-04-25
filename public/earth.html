@@ -5,41 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earth | Solaris Exostellar</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #D1E0B5; color: #3A5A27; overflow-x: hidden; } /* Hijau Alam */
+        body { background-color: #D1E0B5; color: #3A5A27; overflow-x: hidden; }
         .glass-panel { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(58, 90, 39, 0.2); }
         .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translate(0, 0); }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 1s ease-out; }
+        .reveal-right { opacity: 0; transform: translateX(40px); transition: all 1s ease-out; }
+        .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0, 0); }
+        .delay-200 { transition-delay: 200ms; } .delay-400 { transition-delay: 400ms; }
     </style>
 </head>
 <body class="font-sans antialiased">
+
     <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel reveal active">
         <a href="interplanetary.html" class="font-sans font-bold uppercase text-xs tracking-widest text-[#3A5A27] hover:text-[#E09F3D] transition-colors">← Interplanetary Hub</a>
-        <span class="font-serif italic text-xl">Solaris Exostellar</span>
+        <a href="#packages" class="bg-[#3A5A27] text-[#D1E0B5] px-6 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-[#E09F3D] hover:text-white transition-colors">Book Retreat</a>
     </nav>
 
-    <main class="min-h-screen flex flex-col justify-center items-center pt-24 pb-12 px-4 relative z-10">
+    <main class="min-h-screen flex flex-col justify-center items-center pt-32 pb-12 px-4 relative z-10">
         <div class="max-w-5xl mx-auto flex flex-col items-center text-center reveal">
-            <div class="w-full max-w-md mb-10 rounded-[300px] overflow-hidden shadow-2xl border-8 border-white/50">
+            <div class="w-full max-w-md mb-10 rounded-[300px] overflow-hidden shadow-[0_20px_50px_rgba(58,90,39,0.3)] border-8 border-white/50">
                 <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/earth.width-1320.jpg" alt="Earth Poster" class="w-full h-full object-cover">
             </div>
-            
-            <h1 class="text-7xl md:text-[8rem] font-serif mb-2 text-[#3A5A27]">EARTH</h1>
+            <h1 class="text-7xl md:text-[8rem] font-serif mb-2 text-[#3A5A27] leading-none">EARTH</h1>
             <h2 class="text-3xl md:text-5xl font-serif italic text-[#E09F3D] mb-6">Your Oasis in Space</h2>
-            
             <div class="w-24 h-[1px] bg-[#3A5A27] mb-6"></div>
-            
-            <p class="text-lg md:text-xl font-bold uppercase tracking-widest text-[#3A5A27]/80">
-                Where the air is free and breathing is easy
-            </p>
+            <p class="text-lg md:text-xl font-bold uppercase tracking-widest text-[#3A5A27]/80">Where the air is free and breathing is easy</p>
         </div>
     </main>
+
+    <section class="py-24 px-8 lg:px-20 max-w-[1200px] mx-auto border-t border-[#3A5A27]/20">
+        <div class="flex flex-col md:flex-row gap-16 items-center">
+            <div class="w-full md:w-1/2 reveal-left">
+                <h3 class="text-4xl font-serif font-bold mb-6">Return to the Cradle</h3>
+                <p class="mb-6 leading-relaxed text-[#3A5A27]/80">For generations, humanity has reached outward. But true restoration can only be found where our DNA was forged. Earth offers a 1G atmospheric haven perfect for muscular recovery and psychological grounding after prolonged deep-space assignments.</p>
+                <ul class="space-y-3 font-bold text-sm tracking-widest uppercase">
+                    <li class="flex items-center gap-3"><span class="text-[#E09F3D]">✦</span> Unfiltered Atmosphere</li>
+                    <li class="flex items-center gap-3"><span class="text-[#E09F3D]">✦</span> Natural Hydrological Cycles</li>
+                    <li class="flex items-center gap-3"><span class="text-[#E09F3D]">✦</span> Organic Flora & Fauna</li>
+                </ul>
+            </div>
+            <div class="w-full md:w-1/2 reveal-right">
+                <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-white/40">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1000&auto=format&fit=crop" class="w-full h-64 object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="packages" class="py-24 px-8 lg:px-20 bg-white/30">
+        <div class="max-w-[1200px] mx-auto text-center">
+            <h3 class="text-3xl font-serif font-bold mb-12 reveal">Rejuvenation Packages</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-[#D1E0B5] p-8 rounded-[40px] border border-[#3A5A27]/20 reveal delay-200">
+                    <h4 class="font-serif text-2xl font-bold mb-2">Alpine Sanctuary</h4>
+                    <p class="text-xs font-bold uppercase tracking-widest text-[#E09F3D] mb-6">3 Weeks • Swiss Alps</p>
+                    <p class="text-sm mb-8">Focuses on high-altitude fresh air therapy and natural gravity readjustment for inner-system workers.</p>
+                    <button class="w-full py-3 border border-[#3A5A27] rounded-full font-bold text-xs uppercase hover:bg-[#3A5A27] hover:text-[#D1E0B5] transition">Reserve</button>
+                </div>
+                <div class="bg-[#3A5A27] text-[#D1E0B5] p-8 rounded-[40px] reveal delay-400">
+                    <h4 class="font-serif text-2xl font-bold mb-2 text-white">Oceanic Deep</h4>
+                    <p class="text-xs font-bold uppercase tracking-widest text-[#E09F3D] mb-6">2 Weeks • Pacific Reef</p>
+                    <p class="text-sm text-white/70 mb-8">Submersion therapy utilizing Earth's natural saline oceans. Perfect for joint relief after cramped zero-G transit.</p>
+                    <button class="w-full py-3 bg-[#E09F3D] text-white rounded-full font-bold text-xs uppercase hover:bg-white hover:text-[#3A5A27] transition">Reserve</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-xs font-bold uppercase tracking-widest opacity-50 reveal">
+        &copy; 2046 Solaris Exostellar | Earth Division
+    </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const observer = new IntersectionObserver(e => e.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); }));
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
         });
     </script>
 </body>

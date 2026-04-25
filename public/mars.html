@@ -7,42 +7,67 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Manrope:wght@400;800&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #E83525; color: #F4B333; overflow-x: hidden; } /* Merah Mars & Kuning */
+        body { background-color: #E83525; color: #F4B333; overflow-x: hidden; }
         .glass-panel { background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(244, 179, 51, 0.3); }
-        .text-outline { -webkit-text-stroke: 2px #F4B333; color: transparent; }
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translate(0, 0); }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s ease-out; }
+        .reveal.active, .reveal-left.active { opacity: 1; transform: translate(0, 0); }
+        .delay-200 { transition-delay: 200ms; }
     </style>
 </head>
-<body class="font-sans antialiased">
+<body class="font-sans antialiased bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23000000\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]">
+
     <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel reveal active">
         <a href="interplanetary.html" class="font-serif font-black uppercase text-xl text-white hover:text-[#F4B333] transition-colors">← Interplanetary Hub</a>
-        <a href="#book" class="bg-[#F4B333] text-[#E83525] px-6 py-2 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors">Book Tour</a>
+        <a href="#tours" class="bg-[#F4B333] text-[#E83525] px-6 py-2 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors">Book Tour</a>
     </nav>
 
-    <main class="pt-32 px-4 lg:px-20 pb-24 max-w-[1200px] mx-auto relative z-10 flex flex-col lg:flex-row items-center gap-12">
-        <div class="w-full lg:w-1/2 reveal">
+    <main class="pt-32 px-4 lg:px-20 pb-20 max-w-[1400px] mx-auto relative z-10 flex flex-col lg:flex-row items-center gap-12">
+        <div class="w-full lg:w-1/2 reveal-left">
             <p class="font-bold tracking-[0.3em] uppercase text-xs mb-4 text-white">Visit The Historic Sites</p>
-            <h1 class="text-6xl lg:text-[8rem] font-sans font-black leading-[0.8] uppercase tracking-tighter mb-6 text-[#F4B333]">
+            <h1 class="text-6xl lg:text-[9rem] font-sans font-black leading-[0.8] uppercase tracking-tighter mb-6 text-[#F4B333]">
                 M<span class="text-[#0073B9]">A</span>R<span class="text-[#5D2A71]">S</span>
             </h1>
             <h2 class="text-xl font-bold uppercase tracking-widest text-white mb-8 border-l-4 border-[#F4B333] pl-4">Multiple Tours Available</h2>
-            <p class="text-white/90 text-lg mb-8 leading-relaxed">
-                Robotic Pioneers / Arts & Culture / Architecture & Agriculture
-            </p>
-            <a href="#tours" class="inline-block px-10 py-4 border-2 border-[#F4B333] text-[#F4B333] font-bold text-sm uppercase tracking-widest hover:bg-[#F4B333] hover:text-[#E83525] transition-colors">Explore Tours</a>
+            <p class="text-white/90 text-lg mb-8 leading-relaxed max-w-md">Walk the crimson dust where humanity took its first true leap. Discover the relics of robotic pioneers and the brutalist architecture of the first colonies.</p>
         </div>
         <div class="w-full lg:w-1/2 reveal delay-200">
-            <div class="w-full rounded-[40px] overflow-hidden shadow-2xl border-4 border-[#F4B333]">
+            <div class="w-full rounded-[40px] overflow-hidden shadow-[20px_20px_0px_#000] border-4 border-[#F4B333] rotate-2 hover:rotate-0 transition-transform duration-500">
                 <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/mars.width-1320.jpg" alt="Mars Poster" class="w-full h-full object-cover">
             </div>
         </div>
     </main>
 
+    <section id="tours" class="py-24 px-8 lg:px-20 bg-[#000]/10 border-y-4 border-[#000]">
+        <div class="max-w-[1200px] mx-auto">
+            <h3 class="text-4xl font-serif font-black mb-16 text-center text-white reveal">Select Your Expedition</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-[#F4B333] text-[#E83525] p-8 rounded-2xl border-4 border-[#000] shadow-[8px_8px_0px_#000] reveal delay-200">
+                    <h4 class="text-3xl font-black uppercase mb-2">Rover Graveyard</h4>
+                    <p class="font-bold mb-6 text-[#000]">Sector 4 • Curiosity & Perseverance</p>
+                    <p class="mb-8 font-semibold">A guided rover-bus tour through the preservation zones of the 21st-century robotic pioneers. See the tire tracks that started it all.</p>
+                    <button class="px-8 py-3 bg-[#000] text-[#F4B333] font-black uppercase tracking-widest w-full hover:bg-white hover:text-[#E83525] transition-colors">Book Now</button>
+                </div>
+
+                <div class="bg-[#0073B9] text-white p-8 rounded-2xl border-4 border-[#000] shadow-[8px_8px_0px_#000] reveal delay-200">
+                    <h4 class="text-3xl font-black uppercase mb-2">Valles Marineris</h4>
+                    <p class="font-bold mb-6 text-[#F4B333]">Sector 9 • The Grand Canyon of Mars</p>
+                    <p class="mb-8 font-semibold">A breathtaking 3-day hike along the rim of the largest canyon in the solar system. Exo-suit and certified guide provided.</p>
+                    <button class="px-8 py-3 bg-[#F4B333] text-[#E83525] font-black uppercase tracking-widest w-full hover:bg-white transition-colors">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-sm font-bold uppercase tracking-widest text-[#000] reveal">
+        &copy; 2046 Solaris Exostellar | Mars Heritage Division
+    </footer>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const observer = new IntersectionObserver(e => e.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); }));
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal, .reveal-left').forEach(el => observer.observe(el));
         });
     </script>
 </body>
