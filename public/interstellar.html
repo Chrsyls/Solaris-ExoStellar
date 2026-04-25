@@ -5,82 +5,180 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interstellar | Solaris Exostellar</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Manrope:wght@300;400;700&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kMonolith: '#090909', 
+                        kSolarisGlow: '#5D2A71', 
+                        kDecoGold: '#D4AF37', 
+                        kGothicVoid: '#110518', 
+                    },
+                    fontFamily: {
+                        sans: ['"Manrope"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'], 
+                        deco: ['"Cinzel"', 'serif'], 
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { background-color: #0B2744; color: #EAE6DB; overflow-x: hidden; }
-        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        body {
+            background-color: #020203;
+            background-image: url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #EAEAEA;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(2, 2, 3, 0.8), rgba(9, 9, 9, 0.95)); 
+            z-index: -1;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 80px 120px; 
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glass-nav {
+            background: rgba(9, 9, 9, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 3px double rgba(212, 175, 55, 0.3); 
+        }
+
+        /* Portal Monolitik */
+        .portal-panel {
+            background: #090909;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            position: relative;
+            transition: transform 0.5s ease, border-color 0.5s ease;
+        }
+        .portal-panel:hover {
+            transform: scale(1.02);
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.1);
+        }
+        
+        /* Deco Inner Border */
+        .portal-panel::before {
+            content: '';
+            position: absolute;
+            top: 15px; left: 15px; right: 15px; bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+        }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active, .reveal-left.active { opacity: 1; transform: translate(0, 0); }
-        .delay-100 { transition-delay: 100ms; } .delay-200 { transition-delay: 200ms; }
+        
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
     </style>
 </head>
-<body class="font-sans antialiased bg-[url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-fixed bg-center">
+<body class="font-sans antialiased">
+    <div class="grid-overlay"></div>
 
-    <div class="fixed inset-0 bg-[#0B2744]/90 z-0"></div>
-
-    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel border-b border-white/10 reveal active">
-        <a href="index.html" class="flex items-center gap-2 group cursor-pointer">
-            <span class="text-xl font-serif font-black tracking-wider uppercase text-white">Solaris<span class="text-[#D6A04B] text-sm">®</span></span>
+    <nav class="fixed top-0 w-full flex justify-between items-center py-4 px-8 lg:px-20 z-50 glass-nav reveal active">
+        <a href="index.html" class="flex items-center gap-4 group">
+            <div class="w-4 h-4 bg-kDecoGold rotate-45 flex items-center justify-center group-hover:scale-110 transition-transform"></div>
+            <span class="text-2xl font-deco font-bold tracking-[0.2em] text-kDecoGold">Solaris</span>
         </a>
-        <a href="index.html" class="text-xs font-bold tracking-widest uppercase text-white hover:text-[#D6A04B] transition-colors">← Back to Hub</a>
+        <div class="hidden lg:flex space-x-12 text-[10px] font-display font-bold tracking-[0.2em] uppercase text-white/60">
+            <a href="index.html" class="hover:text-white transition-colors">System Hub</a>
+            <a href="interplanetary.html" class="hover:text-white transition-colors">Interplanetary</a>
+            <a href="interstellar.html" class="text-kDecoGold">Interstellar</a>
+            <a href="intergalactic.html" class="hover:text-kSolarisGlow transition-colors">Intergalactic</a>
+        </div>
+        <a href="#" class="border border-kDecoGold text-kDecoGold px-8 py-2 font-display font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-kDecoGold hover:text-kMonolith transition-all">Terminal</a>
     </nav>
 
     <main class="pt-32 px-4 lg:px-20 pb-24 max-w-[1200px] mx-auto relative z-10">
-        <div class="text-center mb-20 reveal">
-            <p class="text-[#D6A04B] font-bold tracking-[0.3em] uppercase text-xs mb-4">Level 02 Clearance</p>
-            <h1 class="text-5xl lg:text-7xl font-serif font-black mb-6 text-white">Beyond the Sun</h1>
-            <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">Piercing the Kuiper belt utilizing Gen-X Warp drives. This exoplanet catalog is strictly reserved for those seeking a new home among other stars.</p>
+        <div class="text-center mb-24 reveal">
+            <div class="w-2 h-2 bg-kDecoGold rotate-45 mx-auto mb-4"></div>
+            <p class="text-kDecoGold font-display font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Level II Clearance</p>
+            <h1 class="text-5xl lg:text-7xl font-deco font-black mb-6 text-white tracking-widest drop-shadow-lg">Beyond the Sun</h1>
+            <p class="text-white/60 max-w-2xl mx-auto leading-relaxed font-sans font-light">Piercing the Kuiper belt utilizing Gen-X Warp drives. This exoplanet catalog is strictly reserved for those seeking a new home among other stars.</p>
         </div>
 
-        <div class="glass-panel rounded-[40px] p-10 mb-20 flex flex-col md:flex-row items-center gap-10 reveal">
-            <div class="w-full md:w-1/2">
-                <h2 class="text-3xl font-serif font-bold text-[#D6A04B] mb-4">Cryo-Stasis Protocol</h2>
-                <p class="text-white/70 text-sm leading-relaxed mb-4">Interstellar travel takes time, even at warp speeds. Our state-of-the-art Cryo-Chambers ensure you age less than a week during a 30-year transit.</p>
-                <p class="text-white/70 text-sm leading-relaxed">Experience vivid, algorithmically generated dreams to keep your neural pathways active while your body rests safely.</p>
+        <div class="border-2 border-kDecoGold/30 bg-kGothicVoid p-10 mb-24 flex flex-col md:flex-row items-center gap-10 reveal relative">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGw0MCA0MG0wLTQwbC00MCA0MCIgc3Ryb2tlPSJyZ2JhKDIxMiwgMTc1LCA1NSwgMC4wNSkiIGZpbGw9Im5vbmUiLz48L3N2Zz4=')] opacity-50 pointer-events-none"></div>
+            <div class="w-full md:w-1/2 relative z-10">
+                <h2 class="text-3xl font-deco font-bold text-kDecoGold mb-4 uppercase">Cryo-Stasis Protocol</h2>
+                <p class="text-white/70 text-sm leading-relaxed mb-4 font-sans font-light">Interstellar travel takes time, even at warp speeds. Our state-of-the-art Cathedral Cryo-Chambers ensure you age less than a week during a 30-year transit.</p>
+                <p class="text-white/70 text-sm leading-relaxed font-sans font-light">Experience vivid, algorithmically generated gothic dreams to keep your neural pathways active while your body rests safely within the monolithic hull.</p>
             </div>
-            <div class="w-full md:w-1/2 h-[250px] rounded-3xl overflow-hidden shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover">
+            <div class="w-full md:w-1/2 h-[300px] rounded-t-full border-4 border-kDecoGold/20 overflow-hidden shadow-2xl relative z-10">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover grayscale sepia-[.3]">
             </div>
         </div>
 
-        <h2 class="text-center text-2xl font-serif font-bold text-white mb-10 reveal border-b border-white/20 pb-4">Approved Exoplanet Destinations</h2>
+        <div class="flex items-center justify-center gap-4 mb-16 reveal">
+            <div class="h-[1px] w-24 bg-kDecoGold/30"></div>
+            <h2 class="text-center text-2xl font-deco font-bold text-white uppercase tracking-widest">Destinations</h2>
+            <div class="h-[1px] w-24 bg-kDecoGold/30"></div>
+        </div>
 
-        <div class="flex flex-col gap-12">
-            <a href="Kepler186f.html" class="glass-panel rounded-[40px] p-8 flex flex-col md:flex-row items-center gap-8 hover:bg-white/10 transition-all group reveal-left delay-100 cursor-pointer border-l-4 border-l-[#D63230]">
-                <div class="w-full md:w-1/3 h-[200px] rounded-[20px] overflow-hidden">
-                    <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/exo-explore/2023/09/wallpaper_kepler_186f.jpeg?w=1024&h=1024&fit=clip&crop=faces%2Cfocalpoint" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="flex flex-col gap-16">
+            <a href="Kepler186f.html" class="portal-panel p-8 md:p-12 flex flex-col md:flex-row items-center gap-12 group reveal-left delay-100 cursor-pointer block">
+                <div class="w-full md:w-2/5 h-[300px] rounded-t-[100px] overflow-hidden border border-[#D63230]/50 relative z-10">
+                    <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/exo-explore/2023/09/wallpaper_kepler_186f.jpeg?w=1024&h=1024&fit=clip&crop=faces%2Cfocalpoint" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
                 </div>
-                <div class="w-full md:w-2/3">
-                    <p class="text-[#D63230] text-[10px] font-bold uppercase tracking-widest mb-2">Sector 186f</p>
-                    <h2 class="text-4xl font-serif font-bold mb-4 text-white">Kepler-186f</h2>
-                    <p class="text-white/60 text-sm mb-6 leading-relaxed">A planet with a red biosphere in the habitable zone. A peaceful environment featuring exclusive crimson flora. The perfect destination for interstellar retirement.</p>
-                    <div class="inline-flex items-center gap-2 text-white font-bold text-xs uppercase tracking-widest group-hover:text-[#D6A04B] transition-colors">
-                        View Destination <span class="group-hover:translate-x-2 transition-transform">→</span>
+                <div class="w-full md:w-3/5 relative z-10 text-center md:text-left">
+                    <p class="text-[#D63230] text-[10px] font-display font-bold uppercase tracking-[0.3em] mb-2">Sector I</p>
+                    <h2 class="text-5xl font-deco font-black mb-6 text-white uppercase tracking-wider">Kepler-186f</h2>
+                    <p class="text-white/60 text-sm mb-8 leading-relaxed font-sans font-light border-l-2 border-[#D63230]/50 pl-4 mx-auto md:mx-0 max-w-md">A planet with a red biosphere in the habitable zone. A peaceful environment featuring exclusive crimson flora. The perfect destination for interstellar retirement.</p>
+                    <div class="inline-flex items-center gap-3 text-white font-display font-bold text-[10px] uppercase tracking-[0.2em] group-hover:text-kDecoGold transition-colors border border-white/20 px-8 py-3 bg-white/5">
+                        Initiate Sequence <span class="group-hover:translate-x-2 transition-transform">→</span>
                     </div>
                 </div>
             </a>
 
-            <a href="hd40307g.html" class="glass-panel rounded-[40px] p-8 flex flex-col md:flex-row items-center gap-8 hover:bg-white/10 transition-all group reveal-left delay-200 cursor-pointer border-l-4 border-l-[#D6A04B]">
-                <div class="w-full md:w-1/3 h-[200px] rounded-[20px] overflow-hidden">
-                    <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/exo-explore/2023/09/hd_40307g_1-1.jpg?w=1024&h=1024&fit=clip&crop=faces%2Cfocalpoint" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 object-top">
+            <a href="hd40307g.html" class="portal-panel p-8 md:p-12 flex flex-col md:flex-row-reverse items-center gap-12 group reveal-left delay-200 cursor-pointer block">
+                <div class="w-full md:w-2/5 h-[300px] rounded-t-[100px] overflow-hidden border border-[#6AE5CB]/50 relative z-10">
+                    <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/superearth.width-1280.jpg" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-1000">
                 </div>
-                <div class="w-full md:w-2/3">
-                    <p class="text-[#D6A04B] text-[10px] font-bold uppercase tracking-widest mb-2">Sector 40307g</p>
-                    <h2 class="text-4xl font-serif font-bold mb-4 text-white">HD 40307g</h2>
-                    <p class="text-white/60 text-sm mb-6 leading-relaxed">A Super-Earth boasting 8 times the mass of Earth. Offers extreme exploration packages and orbital skydiving for ultimate adrenaline seekers.</p>
-                    <div class="inline-flex items-center gap-2 text-white font-bold text-xs uppercase tracking-widest group-hover:text-[#D6A04B] transition-colors">
-                        View Destination <span class="group-hover:translate-x-2 transition-transform">→</span>
+                <div class="w-full md:w-3/5 relative z-10 text-center md:text-right">
+                    <p class="text-[#6AE5CB] text-[10px] font-display font-bold uppercase tracking-[0.3em] mb-2">Sector II</p>
+                    <h2 class="text-5xl font-deco font-black mb-6 text-white uppercase tracking-wider">HD 40307g</h2>
+                    <p class="text-white/60 text-sm mb-8 leading-relaxed font-sans font-light border-r-2 border-[#6AE5CB]/50 pr-4 mx-auto md:mx-0 md:ml-auto max-w-md">A Super-Earth boasting 8 times the mass of Earth. Offers extreme exploration packages and orbital skydiving for ultimate adrenaline seekers.</p>
+                    <div class="inline-flex items-center gap-3 text-white font-display font-bold text-[10px] uppercase tracking-[0.2em] group-hover:text-kDecoGold transition-colors border border-white/20 px-8 py-3 bg-white/5">
+                        <span class="group-hover:-translate-x-2 transition-transform">←</span> Initiate Sequence 
                     </div>
                 </div>
             </a>
         </div>
     </main>
 
+    <footer class="py-8 bg-kMonolith text-center border-t border-white/10 text-kDecoGold/50 text-[10px] uppercase tracking-[0.2em] font-display reveal">
+        <p>&copy; 2046 Solaris Exostellar | Deep Space Catalog</p>
+    </footer>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); }});
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
             }, { threshold: 0.1 });
             document.querySelectorAll('.reveal, .reveal-left').forEach(el => observer.observe(el));
         });

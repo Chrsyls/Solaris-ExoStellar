@@ -5,77 +5,210 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earth | Solaris Exostellar</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kGreen: '#3A5A27',
+                        kGold: '#E09F3D',
+                        kLight: '#EFEAE0',
+                        kDark: '#0f172a'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Manrope"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { background-color: #D1E0B5; color: #3A5A27; overflow-x: hidden; }
-        .glass-panel { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(58, 90, 39, 0.2); }
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
-        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 1s ease-out; }
-        .reveal-right { opacity: 0; transform: translateX(40px); transition: all 1s ease-out; }
+        body { 
+            /* FOTO: Pemandangan Bumi yang asri */
+            background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #EFEAE0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Overlay gelap kehijauan agar konten menonjol dan terasa asri */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.6), rgba(20, 40, 20, 0.8)); 
+            z-index: -1;
+        }
+
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+            border-color: rgba(224, 159, 61, 0.5);
+        }
+
+        /* Animasi Scroll */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-right { opacity: 0; transform: translateX(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0, 0); }
-        .delay-200 { transition-delay: 200ms; } .delay-400 { transition-delay: 400ms; }
+        
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
     </style>
 </head>
 <body class="font-sans antialiased">
 
-    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel reveal active">
-        <a href="interplanetary.html" class="font-sans font-bold uppercase text-xs tracking-widest text-[#3A5A27] hover:text-[#E09F3D] transition-colors">← Interplanetary Hub</a>
-        <a href="#packages" class="bg-[#3A5A27] text-[#D1E0B5] px-6 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-[#E09F3D] hover:text-white transition-colors">Book Retreat</a>
+    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel reveal active border-b-0">
+        <a href="interplanetary.html" class="font-sans font-bold uppercase text-xs tracking-widest text-white hover:text-kGold transition-colors">← Interplanetary Hub</a>
+        <a href="#packages" class="bg-kGold text-white px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-kGreen transition-all shadow-[0_0_15px_rgba(224,159,61,0.4)]">Book Retreat</a>
     </nav>
 
     <main class="min-h-screen flex flex-col justify-center items-center pt-32 pb-12 px-4 relative z-10">
         <div class="max-w-5xl mx-auto flex flex-col items-center text-center reveal">
-            <div class="w-full max-w-md mb-10 rounded-[300px] overflow-hidden shadow-[0_20px_50px_rgba(58,90,39,0.3)] border-8 border-white/50">
-                <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/earth.width-1320.jpg" alt="Earth Poster" class="w-full h-full object-cover">
+            <div class="w-full max-w-sm mb-10 rounded-[300px] overflow-hidden shadow-[0_0_80px_rgba(255,255,255,0.15)] border-4 border-white/30 p-2 glass-panel">
+                <img src="https://d2pn8kiwq2w21t.cloudfront.net/original_images/earth.jpg" alt="Earth Poster" class="w-full h-full object-cover rounded-[300px] hover:scale-105 transition-transform duration-700">
             </div>
-            <h1 class="text-7xl md:text-[8rem] font-serif mb-2 text-[#3A5A27] leading-none">EARTH</h1>
-            <h2 class="text-3xl md:text-5xl font-serif italic text-[#E09F3D] mb-6">Your Oasis in Space</h2>
-            <div class="w-24 h-[1px] bg-[#3A5A27] mb-6"></div>
-            <p class="text-lg md:text-xl font-bold uppercase tracking-widest text-[#3A5A27]/80">Where the air is free and breathing is easy</p>
+            <h1 class="text-7xl md:text-[9rem] font-serif mb-4 text-white leading-none tracking-tight drop-shadow-lg">EARTH</h1>
+            <h2 class="text-2xl md:text-4xl font-serif italic text-kGold mb-8 drop-shadow-md">Your Oasis in Space</h2>
+            <div class="w-16 h-[2px] bg-kGold/70 mb-8"></div>
+            <p class="text-sm md:text-base font-bold uppercase tracking-widest text-white/80 max-w-md leading-loose">
+                Where the air is free<br>and breathing is easy
+            </p>
         </div>
     </main>
 
-    <section class="py-24 px-8 lg:px-20 max-w-[1200px] mx-auto border-t border-[#3A5A27]/20">
+    <section class="py-32 px-8 lg:px-20 max-w-[1300px] mx-auto relative z-10">
         <div class="flex flex-col md:flex-row gap-16 items-center">
             <div class="w-full md:w-1/2 reveal-left">
-                <h3 class="text-4xl font-serif font-bold mb-6">Return to the Cradle</h3>
-                <p class="mb-6 leading-relaxed text-[#3A5A27]/80">For generations, humanity has reached outward. But true restoration can only be found where our DNA was forged. Earth offers a 1G atmospheric haven perfect for muscular recovery and psychological grounding after prolonged deep-space assignments.</p>
-                <ul class="space-y-3 font-bold text-sm tracking-widest uppercase">
-                    <li class="flex items-center gap-3"><span class="text-[#E09F3D]">✦</span> Unfiltered Atmosphere</li>
-                    <li class="flex items-center gap-3"><span class="text-[#E09F3D]">✦</span> Natural Hydrological Cycles</li>
-                    <li class="flex items-center gap-3"><span class="text-[#E09F3D]">✦</span> Organic Flora & Fauna</li>
-                </ul>
+                <p class="text-kGold font-bold uppercase tracking-widest text-xs mb-4">The Ancestral Home</p>
+                <h3 class="text-5xl font-serif font-bold mb-8 text-white">Return to the Cradle</h3>
+                <p class="mb-6 leading-relaxed text-white/70 font-light text-lg">
+                    For generations, humanity has reached outward. We conquered the rust of Mars, the clouds of Venus, and the gravity of super-earths. But true restoration can only be found where our DNA was forged.
+                </p>
+                <p class="mb-8 leading-relaxed text-white/70 font-light text-lg">
+                    Earth offers a pristine 1.0G atmospheric haven perfect for muscular recovery, bone-density regeneration, and psychological grounding after prolonged deep-space assignments.
+                </p>
+                <a href="#protocols" class="inline-block border-b-2 border-kGold text-kGold pb-1 font-bold uppercase tracking-widest text-sm hover:text-white hover:border-white transition-colors">Discover the healing process →</a>
             </div>
-            <div class="w-full md:w-1/2 reveal-right">
-                <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-white/40">
-                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1000&auto=format&fit=crop" class="w-full h-64 object-cover">
+            <div class="w-full md:w-1/2 relative reveal-right delay-200">
+                <div class="rounded-t-[150px] rounded-b-3xl overflow-hidden shadow-2xl border-4 border-white/10 relative z-10 glass-panel p-2">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1000&auto=format&fit=crop" class="w-full h-[500px] object-cover rounded-t-[150px] rounded-b-2xl">
+                </div>
+                <div class="absolute -bottom-10 -left-10 w-48 h-48 border border-kGold/30 rounded-full z-0 animate-spin-slow"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="protocols" class="py-32 px-8 lg:px-20 bg-black/30 border-y border-white/5 relative z-10">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="text-center mb-20 reveal">
+                <h3 class="text-4xl font-serif font-bold text-white mb-4">Restorative Protocols</h3>
+                <p class="text-white/60 max-w-2xl mx-auto">Leave your exo-suits behind. Our Earth-side facilities are designed to recalibrate your biology using the planet's natural rhythms.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="glass-card p-10 rounded-3xl reveal delay-100">
+                    <div class="text-kGold text-4xl mb-6">🌬️</div>
+                    <h4 class="text-2xl font-serif font-bold text-white mb-4">Atmospheric Grounding</h4>
+                    <p class="text-sm text-white/60 leading-relaxed">
+                        Re-acclimate your lungs to pure, unscrubbed oxygen. Breathe deeply without the hum of atmospheric processors or the metallic scent of recycled air.
+                    </p>
+                </div>
+                
+                <div class="glass-card p-10 rounded-3xl reveal delay-200">
+                    <div class="text-kGold text-4xl mb-6">🏔️</div>
+                    <h4 class="text-2xl font-serif font-bold text-white mb-4">Kinetic Therapy</h4>
+                    <p class="text-sm text-white/60 leading-relaxed">
+                        Rediscover the comforting, natural weight of 1.0G through guided alpine treks and forest bathing, essential for reversing zero-G muscular atrophy.
+                    </p>
+                </div>
+
+                <div class="glass-card p-10 rounded-3xl reveal delay-300">
+                    <div class="text-kGold text-4xl mb-6">🌾</div>
+                    <h4 class="text-2xl font-serif font-bold text-white mb-4">Organic Gastronomy</h4>
+                    <p class="text-sm text-white/60 leading-relaxed">
+                        Feast on genuine flora and fauna grown in actual soil, bathed in natural sunlight. Free from hydroponic nutrient-paste substitutes.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="packages" class="py-24 px-8 lg:px-20 bg-white/30">
-        <div class="max-w-[1200px] mx-auto text-center">
-            <h3 class="text-3xl font-serif font-bold mb-12 reveal">Rejuvenation Packages</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-[#D1E0B5] p-8 rounded-[40px] border border-[#3A5A27]/20 reveal delay-200">
-                    <h4 class="font-serif text-2xl font-bold mb-2">Alpine Sanctuary</h4>
-                    <p class="text-xs font-bold uppercase tracking-widest text-[#E09F3D] mb-6">3 Weeks • Swiss Alps</p>
-                    <p class="text-sm mb-8">Focuses on high-altitude fresh air therapy and natural gravity readjustment for inner-system workers.</p>
-                    <button class="w-full py-3 border border-[#3A5A27] rounded-full font-bold text-xs uppercase hover:bg-[#3A5A27] hover:text-[#D1E0B5] transition">Reserve</button>
+    <section id="packages" class="py-32 px-8 lg:px-20 relative z-10">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h3 class="text-5xl font-serif font-bold text-white mb-4">Sanctuary Destinations</h3>
+                    <p class="text-white/60 max-w-md">Choose your environment for recovery. All packages include transit from the Orbital Elevator and a dedicated medical-hospitality team.</p>
                 </div>
-                <div class="bg-[#3A5A27] text-[#D1E0B5] p-8 rounded-[40px] reveal delay-400">
-                    <h4 class="font-serif text-2xl font-bold mb-2 text-white">Oceanic Deep</h4>
-                    <p class="text-xs font-bold uppercase tracking-widest text-[#E09F3D] mb-6">2 Weeks • Pacific Reef</p>
-                    <p class="text-sm text-white/70 mb-8">Submersion therapy utilizing Earth's natural saline oceans. Perfect for joint relief after cramped zero-G transit.</p>
-                    <button class="w-full py-3 bg-[#E09F3D] text-white rounded-full font-bold text-xs uppercase hover:bg-white hover:text-[#3A5A27] transition">Reserve</button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="glass-card rounded-[40px] overflow-hidden flex flex-col group reveal delay-100">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/20">High Altitude</div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <h4 class="text-2xl font-serif font-bold text-white mb-2">The Alpine Retreat</h4>
+                        <p class="text-kGold text-xs font-bold uppercase tracking-widest mb-4">Swiss Alps • 3 Weeks</p>
+                        <p class="text-sm text-white/70 mb-8 flex-grow">Focuses on high-altitude fresh air therapy and natural cardiovascular readjustment. Features thermal hot springs overlooking snow-capped peaks.</p>
+                        <button class="w-full py-4 border border-white/30 text-white font-bold text-xs uppercase tracking-widest rounded-full hover:bg-white hover:text-kDark transition-colors">Reserve</button>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-[40px] overflow-hidden flex flex-col group reveal delay-200 border-kGold/30">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1551405780-03882d5a2ba7?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 bg-kGold/90 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg">Most Popular</div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <h4 class="text-2xl font-serif font-bold text-white mb-2">Pacific Submersion</h4>
+                        <p class="text-kGold text-xs font-bold uppercase tracking-widest mb-4">Polynesian Reefs • 2 Weeks</p>
+                        <p class="text-sm text-white/70 mb-8 flex-grow">Submersion therapy utilizing Earth's natural saline oceans. The buoyancy provides perfect joint relief after cramped zero-G transit.</p>
+                        <button class="w-full py-4 bg-kGold text-white font-bold text-xs uppercase tracking-widest rounded-full hover:bg-white hover:text-kDark transition-colors shadow-lg">Reserve</button>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-[40px] overflow-hidden flex flex-col group reveal delay-300">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/20">Forest Bathing</div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <h4 class="text-2xl font-serif font-bold text-white mb-2">The Redwood Canopy</h4>
+                        <p class="text-kGold text-xs font-bold uppercase tracking-widest mb-4">North America • 14 Days</p>
+                        <p class="text-sm text-white/70 mb-8 flex-grow">Immerse yourself beneath ancient giants. Scientifically proven to reduce cortisol levels and repair the psychological toll of deep-space isolation.</p>
+                        <button class="w-full py-4 border border-white/30 text-white font-bold text-xs uppercase tracking-widest rounded-full hover:bg-white hover:text-kDark transition-colors">Reserve</button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 text-center text-xs font-bold uppercase tracking-widest opacity-50 reveal">
-        &copy; 2046 Solaris Exostellar | Earth Division
+    <footer class="py-12 text-center border-t border-white/10 relative z-10 reveal glass-panel mt-12 border-b-0">
+        <p class="text-xs font-bold uppercase tracking-widest text-white/50">&copy; 2046 Solaris Exostellar | Earth Preservation & Hospitality</p>
     </footer>
 
     <script>

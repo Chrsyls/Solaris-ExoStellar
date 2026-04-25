@@ -5,70 +5,185 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venus | Solaris Exostellar</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #F9E5D8; color: #9CA3AF; overflow-x: hidden; }
-        .glass-panel { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.8); }
-        .text-outline { -webkit-text-stroke: 2px #9CA3AF; color: transparent; }
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
-        .reveal-right { opacity: 0; transform: translateX(40px); transition: all 1s ease-out; }
-        .reveal.active, .reveal-right.active { opacity: 1; transform: translate(0, 0); }
+        body { 
+            /* FOTO: Awan Venus yang tebal dan berwarna emas */
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e8/NASA_Cloud_City_on_Venus.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #4B5563;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Overlay peach-light transparan agar elegan */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(249, 229, 216, 0.5);
+            z-index: -1;
+        }
+
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.4); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.6); 
+        }
+        
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(100, 70, 50, 0.15);
+        }
+
+        /* Animasi Scroll */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-right { opacity: 0; transform: translateX(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0, 0); }
+        
+        .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
     </style>
 </head>
 <body class="font-sans antialiased">
+
     <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel reveal active shadow-sm">
         <a href="interplanetary.html" class="font-sans font-bold uppercase text-xs tracking-widest text-gray-500 hover:text-gray-800 transition-colors">← Interplanetary Hub</a>
         <a href="#suites" class="border border-gray-400 text-gray-500 px-6 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-gray-500 hover:text-white transition-colors">Secure Suite</a>
     </nav>
 
-    <main class="min-h-screen flex items-center justify-center pt-24 pb-12 px-4 lg:px-20 relative z-10">
+    <main class="min-h-screen flex items-center justify-center pt-32 pb-12 px-4 lg:px-20 relative z-10">
         <div class="w-full max-w-[1300px] flex flex-col-reverse lg:flex-row items-center gap-16">
-            <div class="w-full lg:w-1/2 text-center lg:text-left reveal">
+            <div class="w-full lg:w-1/2 text-center lg:text-left reveal-left">
                 <p class="font-bold uppercase tracking-widest text-[#D1A796] mb-4 text-sm">Voted Best Luxury Destination</p>
-                <h1 class="text-[5rem] lg:text-[8rem] font-serif text-outline mb-2 leading-none">VENUS</h1>
+                <h1 class="text-[5rem] lg:text-[8rem] font-serif mb-2 leading-none text-gray-600">VENUS</h1>
                 <h2 class="text-2xl font-bold uppercase tracking-widest text-gray-500 mb-8 border-b border-gray-300 pb-4 inline-block">Cloud 9 Observatory</h2>
-                <p class="text-gray-500 text-lg leading-relaxed mb-10 max-w-md mx-auto lg:mx-0">
-                    Suspended 50 kilometers above the crushing pressure of the surface, our aerostatic geodomes offer absolute luxury and unparalleled views of the Mercury Transit.
+                <p class="text-gray-600 text-lg leading-relaxed mb-10 max-w-md mx-auto lg:mx-0">
+                    Experience absolute luxury suspended 50 kilometers high within the Venusian atmosphere. The premier destination for elite astrotourism.
                 </p>
-                <a href="#suites" class="inline-block px-10 py-4 bg-white text-gray-500 shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-full font-bold text-xs uppercase tracking-widest hover:shadow-[0_15px_40px_rgba(209,167,150,0.4)] transition-all">View Suites</a>
+                <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                    <a href="#suites" class="px-10 py-4 bg-white text-gray-500 shadow-[0_10px_30px_rgba(0,0,0,0.1)] rounded-full font-bold text-xs uppercase tracking-widest hover:shadow-[0_15px_40px_rgba(209,167,150,0.6)] transition-all">View Suites</a>
+                    <a href="#engineering" class="px-10 py-4 border-2 border-gray-500 text-gray-700 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-gray-500 hover:text-white transition-all">Learn More</a>
+                </div>
             </div>
             <div class="w-full lg:w-1/2 flex justify-center reveal-right delay-200">
                 <div class="w-full max-w-md rounded-t-[200px] rounded-b-3xl overflow-hidden shadow-2xl border-8 border-white bg-white">
-                    <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/venus.width-1320.jpg" alt="Venus Poster" class="w-full h-[600px] object-cover object-top opacity-90">
+                    <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/venus.width-1320.jpg" alt="Venus Poster" class="w-full h-[600px] object-cover object-top opacity-95 hover:scale-105 transition-transform duration-700">
                 </div>
             </div>
         </div>
     </main>
 
-    <section id="suites" class="py-24 px-8 lg:px-20 bg-white/40 border-t border-white">
-        <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            <div class="reveal delay-100">
-                <div class="w-16 h-16 mx-auto bg-white rounded-full flex items-center justify-center text-[#D1A796] text-2xl mb-6 shadow-sm">✧</div>
-                <h3 class="font-serif text-2xl text-gray-700 mb-4">Aerostatic Levitation</h3>
-                <p class="text-sm leading-relaxed">Our facilities float gracefully in the temperate zone of the Venusian atmosphere, offering Earth-like gravity and pressure without the need for heavy exo-suits.</p>
+    <section id="engineering" class="py-24 px-8 lg:px-20 relative z-10">
+        <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center gap-16">
+            <div class="w-full md:w-1/2 reveal-left">
+                <div class="glass-card rounded-[40px] p-2 overflow-hidden">
+                    <img src="https://www.themarysue.com/wp-content/uploads/2014/12/7Qam2jB.jpg" alt="Cloud atmosphere" class="w-full h-[400px] object-cover rounded-[32px]">
+                </div>
             </div>
-            <div class="reveal delay-200">
-                <div class="w-16 h-16 mx-auto bg-white rounded-full flex items-center justify-center text-[#D1A796] text-2xl mb-6 shadow-sm">✧</div>
-                <h3 class="font-serif text-2xl text-gray-700 mb-4">The Grand Transit</h3>
-                <p class="text-sm leading-relaxed">Equipped with ultra-violet filtering glass arrays, every suite offers a perfect front-row seat to watch the majestic transit of Mercury across the Sun.</p>
-            </div>
-            <div class="reveal delay-300">
-                <div class="w-16 h-16 mx-auto bg-white rounded-full flex items-center justify-center text-[#D1A796] text-2xl mb-6 shadow-sm">✧</div>
-                <h3 class="font-serif text-2xl text-gray-700 mb-4">Sulfur-Spa Wellness</h3>
-                <p class="text-sm leading-relaxed">Indulge in our world-renowned spa treatments, safely utilizing synthesized atmospheric compounds to rejuvenate skin and relieve zero-G fatigue.</p>
+            <div class="w-full md:w-1/2 reveal-right">
+                <h3 class="text-4xl font-serif font-bold text-gray-800 mb-6">The Engineering of Elegance</h3>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    How do we build a paradise on the solar system's most hostile planet? By rising above it. At 50 kilometers altitude, the Venusian atmosphere is surprisingly Earth-like in pressure and temperature. 
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-8">
+                    Because breathable oxygen and nitrogen are lighter than the heavy carbon dioxide of Venus, our entire resort acts as its own lifting gas. You aren't just staying in a floating city—you are breathing the very air that keeps it aloft.
+                </p>
+                <div class="grid grid-cols-2 gap-6 border-t border-gray-400/30 pt-8">
+                    <div>
+                        <h4 class="text-3xl font-serif text-[#A87A65] mb-1">1.04 Bar</h4>
+                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500">Atmospheric Pressure</p>
+                    </div>
+                    <div>
+                        <h4 class="text-3xl font-serif text-[#A87A65] mb-1">27°C</h4>
+                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500">Ambient Temp</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 text-center text-xs font-bold uppercase tracking-widest text-gray-400 reveal">
-        &copy; 2046 Solaris Exostellar | Venus Hospitality
+    <section class="py-24 px-8 lg:px-20 bg-white/20 border-y border-white/40 relative z-10">
+        <div class="max-w-[1200px] mx-auto text-center">
+            <h3 class="text-4xl font-serif font-bold text-gray-800 mb-16 reveal">Unparalleled Amenities</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-10 rounded-[40px] text-left reveal delay-100 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-12 h-12 rounded-full bg-white text-[#A87A65] flex items-center justify-center text-xl mb-6 shadow-md">☼</div>
+                    <h4 class="text-2xl font-serif font-bold text-gray-800 mb-4">The Grand Transit</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">Equipped with ultra-violet filtering macro-glass arrays, our main observatory offers a perfect, glare-free front-row seat to watch the majestic transit of Mercury across the Sun.</p>
+                </div>
+                
+                <div class="glass-card p-10 rounded-[40px] text-left reveal delay-200 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-12 h-12 rounded-full bg-white text-[#A87A65] flex items-center justify-center text-xl mb-6 shadow-md">♨</div>
+                    <h4 class="text-2xl font-serif font-bold text-gray-800 mb-4">Sulfur-Spa Wellness</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">Indulge in our world-renowned aesthetic treatments, safely utilizing synthesized Venusian atmospheric compounds to rejuvenate skin and reverse zero-G cellular fatigue.</p>
+                </div>
+
+                <div class="glass-card p-10 rounded-[40px] text-left reveal delay-300 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-12 h-12 rounded-full bg-white text-[#A87A65] flex items-center justify-center text-xl mb-6 shadow-md">🥂</div>
+                    <h4 class="text-2xl font-serif font-bold text-gray-800 mb-4">Gourmet Aeroponics</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">Dine on exquisite, genetically optimized flora grown in our onboard aeroponic gardens, bathed in the eternal golden twilight of the Venusian day cycle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="suites" class="py-24 px-8 lg:px-20 relative z-10">
+        <div class="max-w-[1200px] mx-auto">
+            <h3 class="text-4xl font-serif font-bold text-gray-800 mb-12 text-center reveal">Select Your Suite</h3>
+            
+            <div class="flex flex-col gap-8">
+                <div class="glass-card p-8 rounded-3xl flex flex-col md:flex-row items-center gap-8 reveal">
+                    <div class="w-full md:w-1/4 h-40 rounded-2xl overflow-hidden">
+                        <img src="https://i.pinimg.com/736x/7f/25/b2/7f25b23e66d322c3b30cda8048f968b3.jpg" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full md:w-2/4">
+                        <h4 class="text-2xl font-bold font-serif text-gray-800 mb-2">Standard Aerostat Room</h4>
+                        <p class="text-sm text-gray-600 mb-4">Luxurious 80sqm room with smart-glass windows detailing atmospheric composition and weather patterns in real-time.</p>
+                        <ul class="text-xs font-bold tracking-widest uppercase text-[#A87A65] flex gap-4">
+                            <li>1 Bed</li> <li>•</li> <li>Cloud View</li>
+                        </ul>
+                    </div>
+                    <div class="w-full md:w-1/4 flex justify-end">
+                        <button class="w-full md:w-auto px-8 py-3 bg-white text-gray-800 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-gray-800 hover:text-white transition-colors">Book</button>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl flex flex-col md:flex-row items-center gap-8 border-2 border-white reveal delay-100 relative overflow-hidden">
+                    <div class="absolute top-4 right-6 bg-white text-[#A87A65] text-[10px] px-3 py-1 uppercase tracking-widest font-bold rounded-full shadow-sm">Premium</div>
+                    <div class="w-full md:w-1/4 h-40 rounded-2xl overflow-hidden">
+                        <img src="https://i.pinimg.com/originals/ba/19/19/ba1919785959420c3db5fdef18c186a1.jpg" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full md:w-2/4">
+                        <h4 class="text-2xl font-bold font-serif text-gray-800 mb-2">Transit Penthouse</h4>
+                        <p class="text-sm text-gray-600 mb-4">A sprawling 200sqm suite positioned on the equatorial rim of the station, offering unobstructed 180-degree views of the solar transit.</p>
+                        <ul class="text-xs font-bold tracking-widest uppercase text-[#A87A65] flex gap-4">
+                            <li>2 Beds</li> <li>•</li> <li>Transit View</li> <li>•</li> <li>Spa Access</li>
+                        </ul>
+                    </div>
+                    <div class="w-full md:w-1/4 flex justify-end">
+                        <button class="w-full md:w-auto px-8 py-3 bg-gray-800 text-white rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#A87A65] transition-colors">Book</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-xs font-bold uppercase tracking-widest text-gray-500 reveal relative z-10 border-t border-white/30">
+        &copy; 2046 Solaris Exostellar | Venus Hospitality Division
     </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const observer = new IntersectionObserver(e => e.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); }));
-            document.querySelectorAll('.reveal, .reveal-right').forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
         });
     </script>
 </body>

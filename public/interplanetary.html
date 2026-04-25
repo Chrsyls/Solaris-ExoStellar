@@ -5,145 +5,243 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interplanetary | Solaris Exostellar</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Manrope:wght@300;400;700&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        kPaper: '#EAE6DB',
-                        kDeepBlue: '#0B2744',
-                        kGold: '#D6A04B' /* Tambahan emas untuk aksen di bg gelap */
+                        kMonolith: '#090909', 
+                        kSterile: '#EAEAEA',  
+                        kRamaSteel: '#2A2C31',
+                        kSolarisGlow: '#5D2A71', 
+                        kDecoGold: '#D4AF37', 
+                        kGothicVoid: '#110518', 
                     },
-                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Manrope"', 'sans-serif'] }
+                    fontFamily: {
+                        sans: ['"Manrope"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'], 
+                        deco: ['"Cinzel"', 'serif'], 
+                    },
+                    animation: {
+                        'pulse-gold': 'pulse-gold 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'pulse-gold': {
+                            '0%, 100%': { opacity: '0.8', boxShadow: '0 0 20px 0px rgba(212, 175, 55, 0.2)' },
+                            '50%': { opacity: '1', boxShadow: '0 0 40px 5px rgba(212, 175, 55, 0.5)' },
+                        }
+                    }
                 }
             }
         }
     </script>
     <style>
         body {
-            /* BARU: Background image tata surya */
-            background-image: url('https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=2000&auto=format&fit=crop');
+            background-color: #020203;
+            background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Efek parallax statis */
-            color: #fff; /* Ubah warna teks dasar menjadi putih agar terbaca */
+            background-attachment: fixed;
+            color: #EAEAEA;
             overflow-x: hidden;
         }
 
-        /* Overlay gelap agar background tidak terlalu mengganggu konten */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.5); /* Hitam transparan */
+            background: linear-gradient(to bottom, rgba(2, 2, 3, 0.85), rgba(17, 5, 24, 0.95)); 
             z-index: -1;
         }
 
-        .glass-panel {
-            /* Disesuaikan agar serasi dengan bg gelap */
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 80px 120px; 
+            z-index: -1;
+            pointer-events: none;
         }
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal-right { opacity: 0; transform: translateX(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+
+        .glass-nav {
+            background: rgba(9, 9, 9, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 3px double rgba(212, 175, 55, 0.3); 
+        }
+
+        .gothic-panel {
+            background: #090909;
+            border-top-left-radius: 150px;
+            border-top-right-radius: 150px;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-bottom: none;
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.8), inset 0 10px 30px rgba(212, 175, 55, 0.1);
+            position: relative;
+        }
+        
+        .gothic-panel::before {
+            content: '';
+            position: absolute;
+            top: 20px; left: 20px; right: 20px; bottom: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top-left-radius: 130px;
+            border-top-right-radius: 130px;
+            pointer-events: none;
+        }
+
+        /* Kartu dengan bentuk Jendela Katedral / Gothic Arch */
+        .gothic-card {
+            border-top-left-radius: 100px;
+            border-top-right-radius: 100px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(9, 9, 9, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+        .gothic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.8);
+        }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal-right { opacity: 0; transform: translateX(40px); transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0, 0); }
-        .delay-100 { transition-delay: 100ms; } .delay-200 { transition-delay: 200ms; }
+        
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
     </style>
 </head>
 <body class="font-sans antialiased">
+    <div class="grid-overlay"></div>
 
-    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel border-b border-white/10 reveal active">
-        <a href="index.html" class="flex items-center gap-2 group cursor-pointer">
-            <span class="text-xl font-serif font-black tracking-wider uppercase text-white">Solaris<span class="text-kGold text-sm">®</span></span>
+    <nav class="fixed top-0 w-full flex justify-between items-center py-4 px-8 lg:px-20 z-50 glass-nav reveal active">
+        <a href="index.html" class="flex items-center gap-4 group">
+            <div class="w-4 h-4 bg-kDecoGold rotate-45 flex items-center justify-center animate-pulse-gold group-hover:scale-110 transition-transform"></div>
+            <span class="text-2xl font-deco font-bold tracking-[0.2em] text-kDecoGold">Solaris</span>
         </a>
-        <a href="index.html" class="text-xs font-bold tracking-widest uppercase text-white hover:text-kGold transition-colors">← Back to Hub</a>
+        <div class="hidden lg:flex space-x-12 text-[10px] font-display font-bold tracking-[0.2em] uppercase text-white/60">
+            <a href="index.html" class="hover:text-white transition-colors">System Hub</a>
+            <a href="interplanetary.html" class="text-kDecoGold">Interplanetary</a>
+            <a href="interstellar.html" class="hover:text-white transition-colors">Interstellar</a>
+            <a href="intergalactic.html" class="hover:text-kSolarisGlow transition-colors">Intergalactic</a>
+        </div>
+        <a href="#" class="border border-kDecoGold text-kDecoGold px-8 py-2 font-display font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-kDecoGold hover:text-kMonolith transition-all">Terminal</a>
     </nav>
 
     <header class="pt-32 px-4 lg:px-20 pb-16 max-w-[1400px] mx-auto relative z-10">
         <div class="text-center mb-20 reveal">
-            <p class="font-bold tracking-[0.3em] uppercase text-xs mb-4 text-kGold">Level 01 Clearance</p>
-            <h1 class="text-5xl lg:text-7xl font-serif font-black mb-6 text-white leading-tight">The Inner Circle</h1>
-            <p class="text-white/80 max-w-2xl mx-auto leading-relaxed">Domestic travel within the Sol solar system. Stabilized commercial routes with maximum security. Explore our planetary neighbors with the comfort of Earth-standard gravity plating.</p>
+            <div class="w-2 h-2 bg-kDecoGold rotate-45 mx-auto mb-4"></div>
+            <p class="font-display font-bold tracking-[0.4em] uppercase text-[10px] mb-4 text-kDecoGold/70">Level I Clearance</p>
+            <h1 class="text-5xl lg:text-7xl font-deco font-black mb-6 text-white tracking-widest drop-shadow-lg">The Inner Circle</h1>
+            <p class="text-white/60 max-w-2xl mx-auto leading-relaxed font-sans font-light">Domestic travel within the Sol solar system. Stabilized commercial routes with maximum security. Explore our planetary neighbors with the comfort of Earth-standard gravity plating.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <a href="https://d2pn8kiwq2w21t.cloudfront.net/images/earth.width-1320.jpg" class="bg-[#D1E0B5] rounded-[40px] p-8 shadow-lg reveal delay-100 group overflow-hidden relative cursor-pointer border border-[#3A5A27]/20 hover:-translate-y-2 transition-transform">
-                <div class="w-full h-[250px] rounded-[20px] overflow-hidden mb-6"><img src="earth.jpg" alt="Earth" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"></div>
-                <div class="flex justify-between items-center mb-4"><h2 class="text-3xl font-serif font-bold text-[#3A5A27]">Earth Oasis</h2><span class="px-3 py-1 bg-[#3A5A27]/10 text-[#3A5A27] text-[10px] font-bold uppercase tracking-widest rounded-full">Home</span></div>
-                <p class="text-[#3A5A27]/80 text-sm">Where the air is free and breathing is easy. Return to the cradle of humanity.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <a href="earth.html" class="gothic-card p-6 flex flex-col group reveal delay-100">
+                <div class="w-full h-64 rounded-t-[80px] overflow-hidden mb-6 relative">
+                    <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/earth.width-1320.jpg" alt="Earth" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-kMonolith/20 mix-blend-overlay"></div>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-deco font-bold text-white">Earth</h2>
+                    <span class="font-display text-kDecoGold text-[10px] font-bold uppercase tracking-widest">Oasis</span>
+                </div>
+                <p class="text-white/50 text-xs font-sans flex-grow">Where the air is free and breathing is easy. Return to the cradle of humanity.</p>
+                <div class="mt-6 border-t border-white/10 pt-4 text-center text-[10px] font-display uppercase tracking-[0.2em] text-kDecoGold group-hover:text-white transition-colors">Enter Sector</div>
             </a>
-            <a href="https://d2pn8kiwq2w21t.cloudfront.net/images/mars.width-1320.jpg" class="bg-[#E83525] rounded-[40px] p-8 shadow-lg reveal delay-200 group overflow-hidden relative cursor-pointer hover:-translate-y-2 transition-transform">
-                <div class="w-full h-[250px] rounded-[20px] overflow-hidden mb-6"><img src="mars.jpg" alt="Mars" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"></div>
-                <div class="flex justify-between items-center mb-4"><h2 class="text-3xl font-serif font-bold text-white">Historic Mars</h2><span class="px-3 py-1 bg-white/20 text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Heritage</span></div>
-                <p class="text-white/80 text-sm">Visit the historic sites of our robotic pioneers. Multiple tours available.</p>
+
+            <a href="mars.html" class="gothic-card p-6 flex flex-col group reveal delay-200">
+                <div class="w-full h-64 rounded-t-[80px] overflow-hidden mb-6 relative">
+                    <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/mars.width-1320.jpg" alt="Mars" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-[#8B0000]/30 mix-blend-overlay"></div>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-deco font-bold text-white">Mars</h2>
+                    <span class="font-display text-kDecoGold text-[10px] font-bold uppercase tracking-widest">Heritage</span>
+                </div>
+                <p class="text-white/50 text-xs font-sans flex-grow">Visit the historic sites of our robotic pioneers. Walk the crimson dust.</p>
+                <div class="mt-6 border-t border-white/10 pt-4 text-center text-[10px] font-display uppercase tracking-[0.2em] text-kDecoGold group-hover:text-white transition-colors">Enter Sector</div>
             </a>
-            <a href="https://d2pn8kiwq2w21t.cloudfront.net/images/venus.width-1320.jpg" class="bg-[#FADCD1] rounded-[40px] p-8 shadow-lg reveal delay-100 group overflow-hidden relative cursor-pointer hover:-translate-y-2 transition-transform border border-white/50">
-                <div class="w-full h-[250px] rounded-[20px] overflow-hidden mb-6"><img src="venus.jpg" alt="Venus" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"></div>
-                <div class="flex justify-between items-center mb-4"><h2 class="text-3xl font-serif font-bold text-gray-500">Venus Cloud 9</h2><span class="px-3 py-1 bg-gray-500/10 text-gray-500 text-[10px] font-bold uppercase tracking-widest rounded-full">Luxury</span></div>
-                <p class="text-gray-500 text-sm">Voted best place in the solar system to watch the Mercury Transit.</p>
+
+            <a href="venus.html" class="gothic-card p-6 flex flex-col group reveal delay-100">
+                <div class="w-full h-64 rounded-t-[80px] overflow-hidden mb-6 relative">
+                    <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/venus.width-1320.jpg" alt="Venus" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-[#D1A796]/30 mix-blend-overlay"></div>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-deco font-bold text-white">Venus</h2>
+                    <span class="font-display text-kDecoGold text-[10px] font-bold uppercase tracking-widest">Cloud 9</span>
+                </div>
+                <p class="text-white/50 text-xs font-sans flex-grow">Voted best place in the solar system to watch the Mercury Transit.</p>
+                <div class="mt-6 border-t border-white/10 pt-4 text-center text-[10px] font-display uppercase tracking-[0.2em] text-kDecoGold group-hover:text-white transition-colors">Enter Sector</div>
             </a>
-            <a href="https://d2pn8kiwq2w21t.cloudfront.net/images/jupiter.width-1320.jpg" class="bg-[#1A0B2E] rounded-[40px] p-8 shadow-lg reveal delay-200 group overflow-hidden relative cursor-pointer hover:-translate-y-2 transition-transform border border-[#6AE5CB]/20">
-                <div class="w-full h-[250px] rounded-[20px] overflow-hidden mb-6"><img src="jupiter.jpg" alt="Jupiter" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"></div>
-                <div class="flex justify-between items-center mb-4"><h2 class="text-3xl font-serif font-bold text-[#6AE5CB]">Mighty Jupiter</h2><span class="px-3 py-1 bg-[#6AE5CB]/20 text-[#6AE5CB] text-[10px] font-bold uppercase tracking-widest rounded-full">Adventure</span></div>
-                <p class="text-white/70 text-sm">Experience the mighty auroras of the gas giant via balloon descent.</p>
+
+            <a href="jupiter.html" class="gothic-card p-6 flex flex-col group reveal delay-200">
+                <div class="w-full h-64 rounded-t-[80px] overflow-hidden mb-6 relative">
+                    <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/jupiter.width-1320.jpg" alt="Jupiter" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-[#6AE5CB]/20 mix-blend-overlay"></div>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-deco font-bold text-white">Jupiter</h2>
+                    <span class="font-display text-kDecoGold text-[10px] font-bold uppercase tracking-widest">Aurora</span>
+                </div>
+                <p class="text-white/50 text-xs font-sans flex-grow">Experience the mighty auroras of the gas giant via balloon descent.</p>
+                <div class="mt-6 border-t border-white/10 pt-4 text-center text-[10px] font-display uppercase tracking-[0.2em] text-kDecoGold group-hover:text-white transition-colors">Enter Sector</div>
             </a>
         </div>
     </header>
 
-    <section class="w-full bg-black/30 py-24 border-y border-white/10 relative z-10">
+    <section class="w-full bg-kGothicVoid py-24 border-y-4 border-double border-kDecoGold/20 relative z-10">
         <div class="max-w-[1400px] mx-auto px-4 lg:px-20 flex flex-col md:flex-row items-center gap-16">
             <div class="w-full md:w-1/2 reveal-left">
-                <h2 class="text-4xl font-serif font-bold text-white mb-6">The Sol Fleet</h2>
-                <p class="text-white/70 mb-6 leading-relaxed">Our inner-system vessels are powered by 4th-generation Ion Thrusters, ensuring a smooth, low-latency transit. From the Lunar Gateway to the Jovian outposts, travel in unmatched mid-century modern comfort.</p>
-                <ul class="space-y-4 border-l-2 border-kGold pl-4">
-                    <li><strong class="text-white">Ion Cruiser Class:</strong> 3-week transit to Mars.</li>
-                    <li><strong class="text-white">Aero-Balloons:</strong> Specialized for Venus & Jupiter descent.</li>
-                    <li><strong class="text-white">Orbital Elevators:</strong> Seamless surface-to-space transfer.</li>
+                <h2 class="text-4xl font-deco font-bold text-white mb-6 uppercase tracking-wider">The Sol Fleet</h2>
+                <p class="text-white/60 mb-8 leading-relaxed font-sans font-light">Our inner-system vessels are powered by 4th-generation Ion Thrusters, ensuring a smooth, low-latency transit. From the Lunar Gateway to the Jovian outposts, travel in unmatched Art Deco comfort.</p>
+                <ul class="space-y-6">
+                    <li class="flex items-start gap-4">
+                        <div class="w-3 h-3 bg-kDecoGold rotate-45 mt-1 shrink-0"></div>
+                        <div>
+                            <h4 class="font-display font-bold text-white tracking-widest uppercase text-xs mb-1">Ion Cruiser Class</h4>
+                            <p class="text-xs text-white/40 font-sans">3-week transit to Mars.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="w-3 h-3 bg-kDecoGold rotate-45 mt-1 shrink-0"></div>
+                        <div>
+                            <h4 class="font-display font-bold text-white tracking-widest uppercase text-xs mb-1">Aero-Balloons</h4>
+                            <p class="text-xs text-white/40 font-sans">Specialized for Venus & Jupiter descent.</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div class="w-full md:w-1/2 reveal-right">
-                <div class="w-full h-[400px] rounded-[40px] overflow-hidden shadow-2xl relative">
+                <div class="w-full h-[400px] rounded-t-full overflow-hidden shadow-[0_0_40px_rgba(212,175,55,0.1)] relative border-2 border-kDecoGold/30">
                     <img src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover grayscale contrast-125 sepia-[.2]">
-                    <div class="absolute inset-0 bg-kDeepBlue/40 mix-blend-multiply"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-24 max-w-[1200px] mx-auto px-4 lg:px-20 text-center reveal relative z-10">
-        <h2 class="text-3xl font-serif font-bold text-white mb-12">Pre-Flight Requirements</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="glass-panel p-8 rounded-3xl">
-                <div class="text-kGold text-3xl mb-4">🩺</div>
-                <h3 class="font-bold text-lg mb-2 text-white">Medical Exam</h3>
-                <p class="text-sm text-white/70">Standard high-G tolerance check. Required for atmospheric exits and rapid deceleration.</p>
-            </div>
-            <div class="glass-panel p-8 rounded-3xl">
-                <div class="text-kGold text-3xl mb-4">🛂</div>
-                <h3 class="font-bold text-lg mb-2 text-white">Sol-Pass</h3>
-                <p class="text-sm text-white/70">United Earth government clearance for inter-colony travel and deep space outposts.</p>
-            </div>
-            <div class="glass-panel p-8 rounded-3xl">
-                <div class="text-kGold text-3xl mb-4">🎒</div>
-                <h3 class="font-bold text-lg mb-2 text-white">Gravity Gear</h3>
-                <p class="text-sm text-white/70">Magnetic boots and pressure suits are provided, but personal tailoring requires a 2-week notice.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-12 text-center text-xs font-bold uppercase tracking-widest text-white/30 reveal relative z-10 border-t border-white/10">
-        &copy; 2046 Solaris Exostellar | Sol System Operations
+    <footer class="py-12 bg-kMonolith text-center border-t border-white/10 text-kDecoGold/50 text-[10px] uppercase tracking-[0.2em] font-display reveal relative z-10">
+        <p>&copy; 2046 Solaris Exostellar | Sol System Operations</p>
     </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); }});
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
             }, { threshold: 0.1 });
-            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .gothic-card').forEach(el => observer.observe(el));
         });
     </script>
 </body>

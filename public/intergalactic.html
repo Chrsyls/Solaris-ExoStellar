@@ -5,74 +5,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intergalactic | Solaris Exostellar</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        body { background-color: #050505; color: #fff; overflow-x: hidden; }
-        .glitch-effect { text-shadow: 2px 0 #8B0000, -2px 0 #0000ff; animation: glitch 2s infinite; }
-        @keyframes glitch {
-            0% { text-shadow: 2px 0 #8B0000, -2px 0 #0000ff; }
-            5% { text-shadow: -2px 0 #8B0000, 2px 0 #0000ff; }
-            10% { text-shadow: 2px 0 #8B0000, -2px 0 #0000ff; }
-            15% { text-shadow: 0 0 transparent; }
-            100% { text-shadow: 0 0 transparent; }
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Manrope:wght@300;400;700&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kMonolith: '#090909', 
+                        kSolarisGlow: '#5D2A71', 
+                        kDecoGold: '#D4AF37', 
+                        kGothicVoid: '#110518', 
+                    },
+                    fontFamily: {
+                        sans: ['"Manrope"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'], 
+                        deco: ['"Cinzel"', 'serif'], 
+                    },
+                    animation: {
+                        'solaris-flow': 'solaris-flow 15s ease infinite',
+                        'pulse-gold': 'pulse-gold 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glitch': 'glitch 3s infinite',
+                    },
+                    keyframes: {
+                        'solaris-flow': {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        'pulse-gold': {
+                            '0%, 100%': { opacity: '0.8', boxShadow: '0 0 20px 0px rgba(212, 175, 55, 0.2)' },
+                            '50%': { opacity: '1', boxShadow: '0 0 40px 5px rgba(212, 175, 55, 0.5)' },
+                        },
+                        'glitch': {
+                            '0%, 100%': { textShadow: '2px 0 #5D2A71, -2px 0 #D4AF37' },
+                            '5%': { textShadow: '-2px 0 #5D2A71, 2px 0 #D4AF37' },
+                            '10%': { textShadow: '2px 0 #5D2A71, -2px 0 #D4AF37' },
+                            '15%': { textShadow: '0 0 transparent' },
+                        }
+                    }
+                }
+            }
         }
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+    </script>
+    <style>
+        body {
+            background-color: #020203;
+            background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #EAEAEA;
+            overflow-x: hidden;
+        }
+
+        /* Overlay Katedral Void - Deep Purple/Black */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(2, 2, 3, 0.85), rgba(17, 5, 24, 0.98)); 
+            z-index: -1;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(93, 42, 113, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 80px 120px; 
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Animasi Fluid Lautan Solaris */
+        .bg-solaris-ocean {
+            background: linear-gradient(270deg, #090909, #110518, #5D2A71, #1a2a6c);
+            background-size: 400% 400%;
+            animation: solaris-flow 15s ease infinite;
+        }
+
+        .glass-nav {
+            background: rgba(9, 9, 9, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 3px double rgba(93, 42, 113, 0.5); 
+        }
+
+        .gothic-arch-window {
+            border-top-left-radius: 200px;
+            border-top-right-radius: 200px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: inset 0 0 100px rgba(93, 42, 113, 0.8), 0 0 50px rgba(17, 5, 24, 0.9);
+        }
+
+        .glitch-text { animation: glitch 4s infinite; }
+
+        /* Efek Redacted Text dengan warna Emas Kosmik/Ungu */
+        .redacted { 
+            background-color: #5D2A71; 
+            color: #5D2A71; 
+            user-select: none; 
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .redacted:hover { 
+            background-color: transparent; 
+            color: #D4AF37; 
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+        }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translate(0, 0); }
-        .redacted { background-color: #8B0000; color: #8B0000; user-select: none; }
-        .redacted:hover { background-color: transparent; color: #8B0000; } /* Easter egg: hover reveals text */
     </style>
 </head>
-<body class="font-sans antialiased bg-[url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-fixed bg-center">
+<body class="font-sans antialiased">
+    <div class="grid-overlay"></div>
 
-    <div class="fixed inset-0 bg-black/90 z-0"></div>
-
-    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 border-b border-white/5 reveal active bg-black/50 backdrop-blur-sm">
-        <a href="index.html" class="flex items-center gap-2 group cursor-pointer">
-            <span class="text-xl font-serif font-black tracking-wider uppercase text-white/50">Solaris<span class="text-[#8B0000] text-sm">X</span></span>
+    <nav class="fixed top-0 w-full flex justify-between items-center py-4 px-8 lg:px-20 z-50 glass-nav reveal active">
+        <a href="index.html" class="flex items-center gap-4 group">
+            <div class="w-4 h-4 bg-kSolarisGlow rotate-45 flex items-center justify-center animate-pulse-gold group-hover:scale-110 transition-transform"></div>
+            <span class="text-2xl font-deco font-bold tracking-[0.2em] text-white/50">Solaris<span class="text-kSolarisGlow">X</span></span>
         </a>
-        <a href="index.html" class="text-xs font-mono tracking-widest text-white/50 hover:text-[#8B0000] transition-colors">[ABORT & RETURN]</a>
+        <div class="hidden lg:flex space-x-12 text-[10px] font-display font-bold tracking-[0.2em] uppercase text-white/60">
+            <a href="index.html" class="hover:text-white transition-colors">System Hub</a>
+            <a href="interplanetary.html" class="hover:text-white transition-colors">Interplanetary</a>
+            <a href="interstellar.html" class="hover:text-white transition-colors">Interstellar</a>
+            <a href="intergalactic.html" class="text-kSolarisGlow">Intergalactic</a>
+        </div>
+        <a href="index.html" class="border border-kSolarisGlow text-kSolarisGlow px-8 py-2 font-display font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-kSolarisGlow hover:text-white transition-all">
+            [ ABORT & RETURN ]
+        </a>
     </nav>
 
     <main class="min-h-screen pt-32 pb-20 px-4 relative z-10 flex flex-col items-center">
         
-        <div class="text-center max-w-3xl reveal w-full mb-16">
-            <div class="w-24 h-24 mx-auto mb-8 rounded-full border border-[#8B0000] flex items-center justify-center animate-pulse shadow-[0_0_30px_#8B0000]">
-                <span class="text-[#8B0000] font-mono font-bold">L-03</span>
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[800px] gothic-arch-window bg-solaris-ocean z-0 opacity-40 mix-blend-screen pointer-events-none"></div>
+
+        <div class="text-center max-w-3xl reveal w-full mb-16 relative z-10 mt-10">
+            <div class="w-20 h-20 mx-auto mb-8 rotate-45 border-2 border-kDecoGold flex items-center justify-center animate-pulse-gold shadow-[0_0_40px_rgba(212,175,55,0.2)] bg-kGothicVoid">
+                <span class="text-kDecoGold font-display font-bold -rotate-45 text-xl">III</span>
             </div>
-            <p class="text-[#8B0000] font-mono tracking-[0.5em] uppercase text-xs mb-4">Top Secret / Classified</p>
-            <h1 class="text-5xl md:text-7xl font-serif font-black mb-6 text-white glitch-effect uppercase tracking-tighter">The Void Between</h1>
+            <p class="text-kDecoGold font-display tracking-[0.6em] uppercase text-[10px] mb-4">Classified Anomaly</p>
+            <h1 class="text-6xl md:text-[7rem] font-deco font-black mb-6 text-white glitch-text uppercase tracking-widest drop-shadow-2xl">The Void<br>Between</h1>
         </div>
 
-        <div class="w-full max-w-3xl border border-white/10 bg-black/60 backdrop-blur-md p-8 md:p-12 mb-12 reveal font-mono text-sm leading-relaxed text-white/70">
-            <div class="flex justify-between items-center border-b border-[#8B0000]/30 pb-4 mb-6">
-                <span class="text-[#8B0000]">DATA ARCHIVE: ANDROMEDA</span>
-                <span class="text-white/30">DATE: 2046.11.04</span>
+        <div class="w-full max-w-4xl bg-kMonolith border-x-2 border-t-2 border-white/5 p-8 md:p-12 mb-16 reveal font-display text-sm leading-relaxed text-white/70 shadow-[0_30px_60px_rgba(0,0,0,0.9)] relative z-10 border-b-4 border-b-kSolarisGlow rounded-t-[60px]">
+            
+            <div class="flex justify-between items-end border-b-2 border-double border-white/20 pb-4 mb-8">
+                <div>
+                    <span class="text-kDecoGold tracking-widest uppercase font-bold text-xs">Data Archive: Andromeda</span>
+                    <p class="text-white/30 text-[10px] tracking-widest mt-1">TERMINAL // 9000-OMEGA</p>
+                </div>
+                <span class="text-kSolarisGlow font-bold tracking-widest text-[10px] animate-pulse">STATUS: FLUID</span>
             </div>
             
-            <p class="mb-4">> WARNING: You are accessing experimental routing data. Unauthorized access will result in immediate neurological termination.</p>
-            
-            <p class="mb-4">> Project Andromeda involves unstable space-folding mechanics. Current biological survival rates are <span class="redacted">14.3 percent</span>. Neural preservation protocol <span class="text-[#D6A04B]">#77-B</span> is mandatory before physical transit.</p>
+            <div class="space-y-6 font-sans font-light text-base">
+                <p class="border-l-2 border-kSolarisGlow pl-4">> <strong class="text-white font-display">WARNING:</strong> You are accessing experimental space-folding mechanics. Unauthorized access will result in immediate neurological termination by the Cathedral Mainframe.</p>
+                
+                <p>> Project Andromeda relies on dimensional anomalies found beyond the local cluster. Current biological survival rates during transit are <span class="redacted" title="Hover to reveal">14.3 percent</span>. Neural preservation protocol <span class="text-kDecoGold font-bold">#77-B</span> is mandatory before relinquishing your physical vessel.</p>
 
-            <p class="mb-6">> The entity encountered near the Sagittarius A* singularity has been confirmed to be <span class="redacted">non-hostile but multi-dimensional</span>. Communication attempts are ongoing.</p>
+                <p>> The entity encountered near the Sagittarius A* singularity has been confirmed to be <span class="redacted" title="Hover to reveal">non-hostile but multi-dimensional</span>. It does not communicate in sound, but in geometric hallucinations. Do not stare into the ocean.</p>
+            </div>
             
-            <div class="bg-[#8B0000]/10 border-l-4 border-[#8B0000] p-4 text-[#8B0000]">
-                <p class="animate-pulse">> WAITING FOR BIOMETRIC OVERRIDE CODE...</p>
+            <div class="mt-12 bg-kGothicVoid border border-kSolarisGlow/50 p-6 text-center shadow-[inset_0_0_20px_rgba(93,42,113,0.2)]">
+                <p class="animate-pulse text-kDecoGold tracking-widest uppercase text-xs font-bold">> AWAITING BIOMETRIC OVERRIDE ALIGNMENT...</p>
             </div>
         </div>
 
-        <div class="reveal text-center">
-            <button onclick="alert('ACCESS DENIED. OMEGA CLEARANCE REQUIRED.')" class="px-10 py-5 bg-transparent border-2 border-[#8B0000] text-[#8B0000] font-mono font-bold text-sm tracking-widest uppercase hover:bg-[#8B0000] hover:text-black transition-all shadow-[0_0_20px_rgba(139,0,0,0.2)] hover:shadow-[0_0_40px_rgba(139,0,0,0.6)]">
-                Initialize Space-Fold
+        <div class="reveal text-center relative z-10 mb-20">
+            <button onclick="alert('ACCESS DENIED. OMEGA CLEARANCE REQUIRED TO FOLD SPACE.')" class="group relative px-12 py-5 bg-kMonolith border border-kSolarisGlow text-white font-display font-bold text-[10px] tracking-[0.3em] uppercase hover:bg-kSolarisGlow hover:text-white transition-all shadow-[0_0_30px_rgba(93,42,113,0.3)] hover:shadow-[0_0_60px_rgba(93,42,113,0.8)] overflow-hidden">
+                <span class="relative z-10">Initialize Space-Fold</span>
+                <div class="absolute inset-0 bg-solaris-ocean opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
             </button>
-            <p class="text-white/30 font-mono text-[10px] mt-4">By clicking this, you forfeit all rights to your physical form.</p>
+            <p class="text-white/30 font-display text-[10px] mt-6 tracking-widest">By initiating, you forfeit all rights to your terrestrial anatomy.</p>
         </div>
 
     </main>
 
+    <footer class="py-8 bg-kMonolith text-center border-t border-white/5 text-white/20 text-[10px] uppercase tracking-[0.3em] font-display reveal relative z-10">
+        <p>&copy; 2046 Solaris Exostellar | Section: Classified Anomaly</p>
+    </footer>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); }});
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
             }, { threshold: 0.1 });
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
