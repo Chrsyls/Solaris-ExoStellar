@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jupiter | Solaris Exostellar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #1A0B2E; color: #fff; overflow-x: hidden; } /* Ungu Gelap Luar Angkasa */
+        .glass-panel { background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(106, 229, 203, 0.2); }
+        .text-glow { text-shadow: 0 0 20px rgba(106, 229, 203, 0.5), 0 0 40px rgba(183, 83, 162, 0.5); }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal.active { opacity: 1; transform: translate(0, 0); }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel reveal active">
+        <a href="interplanetary.html" class="font-sans font-bold uppercase text-xs tracking-widest text-[#6AE5CB] hover:text-[#B753A2] transition-colors">← Interplanetary Hub</a>
+        <a href="#book" class="bg-gradient-to-r from-[#6AE5CB] to-[#B753A2] text-white px-6 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest hover:opacity-80 transition-opacity">Experience Now</a>
+    </nav>
+
+    <main class="min-h-screen flex items-center justify-center pt-24 pb-12 px-4 lg:px-20 relative z-10">
+        <div class="w-full max-w-[1200px] flex flex-col lg:flex-row items-center gap-16">
+            
+            <div class="w-full lg:w-1/2 flex justify-center lg:justify-start reveal delay-200">
+                <div class="w-full max-w-md rounded-[40px] overflow-hidden shadow-[0_0_50px_rgba(183,83,162,0.3)] border border-[#6AE5CB]/30">
+                    <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/jupiter.width-1320.jpg" alt="Jupiter Poster" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/2 text-center lg:text-left reveal">
+                <p class="font-sans font-bold uppercase tracking-[0.3em] text-[#6AE5CB] mb-4">Experience the Mighty Auroras of</p>
+                <h1 class="text-[5rem] lg:text-[7rem] font-serif font-black text-glow mb-8 leading-none">JUPITER</h1>
+                <p class="text-white/70 text-lg leading-relaxed mb-10 max-w-md mx-auto lg:mx-0">
+                    Descend into the upper atmosphere via specialized thermal balloons. Witness the greatest light show in the solar system up close.
+                </p>
+                <a href="#book" class="inline-block px-10 py-4 bg-transparent border-2 border-[#B753A2] text-[#B753A2] hover:bg-[#B753A2] hover:text-white rounded-full font-bold text-xs uppercase tracking-widest transition-all">Begin Descent</a>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver(e => e.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); }));
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

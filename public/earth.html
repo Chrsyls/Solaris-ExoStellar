@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earth | Solaris Exostellar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #D1E0B5; color: #3A5A27; overflow-x: hidden; } /* Hijau Alam */
+        .glass-panel { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(58, 90, 39, 0.2); }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translate(0, 0); }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel reveal active">
+        <a href="interplanetary.html" class="font-sans font-bold uppercase text-xs tracking-widest text-[#3A5A27] hover:text-[#E09F3D] transition-colors">← Interplanetary Hub</a>
+        <span class="font-serif italic text-xl">Solaris Exostellar</span>
+    </nav>
+
+    <main class="min-h-screen flex flex-col justify-center items-center pt-24 pb-12 px-4 relative z-10">
+        <div class="max-w-5xl mx-auto flex flex-col items-center text-center reveal">
+            <div class="w-full max-w-md mb-10 rounded-[300px] overflow-hidden shadow-2xl border-8 border-white/50">
+                <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/earth.width-1320.jpg" alt="Earth Poster" class="w-full h-full object-cover">
+            </div>
+            
+            <h1 class="text-7xl md:text-[8rem] font-serif mb-2 text-[#3A5A27]">EARTH</h1>
+            <h2 class="text-3xl md:text-5xl font-serif italic text-[#E09F3D] mb-6">Your Oasis in Space</h2>
+            
+            <div class="w-24 h-[1px] bg-[#3A5A27] mb-6"></div>
+            
+            <p class="text-lg md:text-xl font-bold uppercase tracking-widest text-[#3A5A27]/80">
+                Where the air is free and breathing is easy
+            </p>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver(e => e.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); }));
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

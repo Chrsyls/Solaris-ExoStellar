@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars | Solaris Exostellar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Manrope:wght@400;800&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #E83525; color: #F4B333; overflow-x: hidden; } /* Merah Mars & Kuning */
+        .glass-panel { background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(244, 179, 51, 0.3); }
+        .text-outline { -webkit-text-stroke: 2px #F4B333; color: transparent; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translate(0, 0); }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel reveal active">
+        <a href="interplanetary.html" class="font-serif font-black uppercase text-xl text-white hover:text-[#F4B333] transition-colors">← Interplanetary Hub</a>
+        <a href="#book" class="bg-[#F4B333] text-[#E83525] px-6 py-2 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors">Book Tour</a>
+    </nav>
+
+    <main class="pt-32 px-4 lg:px-20 pb-24 max-w-[1200px] mx-auto relative z-10 flex flex-col lg:flex-row items-center gap-12">
+        <div class="w-full lg:w-1/2 reveal">
+            <p class="font-bold tracking-[0.3em] uppercase text-xs mb-4 text-white">Visit The Historic Sites</p>
+            <h1 class="text-6xl lg:text-[8rem] font-sans font-black leading-[0.8] uppercase tracking-tighter mb-6 text-[#F4B333]">
+                M<span class="text-[#0073B9]">A</span>R<span class="text-[#5D2A71]">S</span>
+            </h1>
+            <h2 class="text-xl font-bold uppercase tracking-widest text-white mb-8 border-l-4 border-[#F4B333] pl-4">Multiple Tours Available</h2>
+            <p class="text-white/90 text-lg mb-8 leading-relaxed">
+                Robotic Pioneers / Arts & Culture / Architecture & Agriculture
+            </p>
+            <a href="#tours" class="inline-block px-10 py-4 border-2 border-[#F4B333] text-[#F4B333] font-bold text-sm uppercase tracking-widest hover:bg-[#F4B333] hover:text-[#E83525] transition-colors">Explore Tours</a>
+        </div>
+        <div class="w-full lg:w-1/2 reveal delay-200">
+            <div class="w-full rounded-[40px] overflow-hidden shadow-2xl border-4 border-[#F4B333]">
+                <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/mars.width-1320.jpg" alt="Mars Poster" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver(e => e.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); }));
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

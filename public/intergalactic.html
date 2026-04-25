@@ -6,16 +6,6 @@
     <title>Intergalactic | Solaris Exostellar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { kDeep: '#050505', kGold: '#D6A04B', kRed: '#8B0000' },
-                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Manrope"', 'sans-serif'], mono: ['monospace'] }
-                }
-            }
-        }
-    </script>
     <style>
         body { background-color: #050505; color: #fff; overflow-x: hidden; }
         .glitch-effect { text-shadow: 2px 0 #8B0000, -2px 0 #0000ff; animation: glitch 2s infinite; }
@@ -28,38 +18,55 @@
         }
         .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translate(0, 0); }
+        .redacted { background-color: #8B0000; color: #8B0000; user-select: none; }
+        .redacted:hover { background-color: transparent; color: #8B0000; } /* Easter egg: hover reveals text */
     </style>
 </head>
 <body class="font-sans antialiased bg-[url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-fixed bg-center">
 
     <div class="fixed inset-0 bg-black/90 z-0"></div>
 
-    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 border-b border-white/5 reveal active">
+    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 border-b border-white/5 reveal active bg-black/50 backdrop-blur-sm">
         <a href="index.html" class="flex items-center gap-2 group cursor-pointer">
-            <span class="text-xl font-serif font-black tracking-wider uppercase text-white/50">Solaris<span class="text-kRed text-sm">X</span></span>
+            <span class="text-xl font-serif font-black tracking-wider uppercase text-white/50">Solaris<span class="text-[#8B0000] text-sm">X</span></span>
         </a>
-        <a href="index.html" class="text-xs font-mono tracking-widest text-white/50 hover:text-kRed transition-colors">[ABORT & RETURN]</a>
+        <a href="index.html" class="text-xs font-mono tracking-widest text-white/50 hover:text-[#8B0000] transition-colors">[ABORT & RETURN]</a>
     </nav>
 
-    <main class="min-h-screen flex items-center justify-center px-4 relative z-10">
-        <div class="text-center max-w-2xl reveal">
-            <div class="w-24 h-24 mx-auto mb-8 rounded-full border border-kRed flex items-center justify-center animate-pulse">
-                <span class="text-kRed font-mono font-bold">L-03</span>
+    <main class="min-h-screen pt-32 pb-20 px-4 relative z-10 flex flex-col items-center">
+        
+        <div class="text-center max-w-3xl reveal w-full mb-16">
+            <div class="w-24 h-24 mx-auto mb-8 rounded-full border border-[#8B0000] flex items-center justify-center animate-pulse shadow-[0_0_30px_#8B0000]">
+                <span class="text-[#8B0000] font-mono font-bold">L-03</span>
             </div>
-            
-            <p class="text-kRed font-mono tracking-[0.5em] uppercase text-xs mb-4">Top Secret / Classified</p>
+            <p class="text-[#8B0000] font-mono tracking-[0.5em] uppercase text-xs mb-4">Top Secret / Classified</p>
             <h1 class="text-5xl md:text-7xl font-serif font-black mb-6 text-white glitch-effect uppercase tracking-tighter">The Void Between</h1>
-            
-            <div class="border-y border-white/10 py-6 mb-8 text-left">
-                <p class="text-white/50 font-mono text-sm mb-4">> WARNING: You are accessing experimental routing data.</p>
-                <p class="text-white/80 font-mono text-sm leading-relaxed mb-4">> Project Andromeda involves unstable space-folding mechanics. Survival rates are currently redacted. Neural preservation is mandatory before physical transit.</p>
-                <p class="text-kGold font-mono text-sm animate-pulse">> WAITING FOR OVERRIDE CODE...</p>
-            </div>
-
-            <button class="px-8 py-4 bg-transparent border-2 border-kRed text-kRed font-mono font-bold text-xs tracking-widest uppercase hover:bg-kRed hover:text-black transition-all">
-                Request Omega Clearance
-            </button>
         </div>
+
+        <div class="w-full max-w-3xl border border-white/10 bg-black/60 backdrop-blur-md p-8 md:p-12 mb-12 reveal font-mono text-sm leading-relaxed text-white/70">
+            <div class="flex justify-between items-center border-b border-[#8B0000]/30 pb-4 mb-6">
+                <span class="text-[#8B0000]">DATA ARCHIVE: ANDROMEDA</span>
+                <span class="text-white/30">DATE: 2046.11.04</span>
+            </div>
+            
+            <p class="mb-4">> WARNING: You are accessing experimental routing data. Unauthorized access will result in immediate neurological termination.</p>
+            
+            <p class="mb-4">> Project Andromeda involves unstable space-folding mechanics. Current biological survival rates are <span class="redacted">14.3 percent</span>. Neural preservation protocol <span class="text-[#D6A04B]">#77-B</span> is mandatory before physical transit.</p>
+
+            <p class="mb-6">> The entity encountered near the Sagittarius A* singularity has been confirmed to be <span class="redacted">non-hostile but multi-dimensional</span>. Communication attempts are ongoing.</p>
+            
+            <div class="bg-[#8B0000]/10 border-l-4 border-[#8B0000] p-4 text-[#8B0000]">
+                <p class="animate-pulse">> WAITING FOR BIOMETRIC OVERRIDE CODE...</p>
+            </div>
+        </div>
+
+        <div class="reveal text-center">
+            <button onclick="alert('ACCESS DENIED. OMEGA CLEARANCE REQUIRED.')" class="px-10 py-5 bg-transparent border-2 border-[#8B0000] text-[#8B0000] font-mono font-bold text-sm tracking-widest uppercase hover:bg-[#8B0000] hover:text-black transition-all shadow-[0_0_20px_rgba(139,0,0,0.2)] hover:shadow-[0_0_40px_rgba(139,0,0,0.6)]">
+                Initialize Space-Fold
+            </button>
+            <p class="text-white/30 font-mono text-[10px] mt-4">By clicking this, you forfeit all rights to your physical form.</p>
+        </div>
+
     </main>
 
     <script>

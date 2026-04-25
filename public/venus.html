@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venus | Solaris Exostellar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #F9E5D8; color: #9CA3AF; overflow-x: hidden; } /* Peach & Abu-abu Elegan */
+        .glass-panel { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.8); }
+        .text-outline { -webkit-text-stroke: 2px #9CA3AF; color: transparent; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translate(0, 0); }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel reveal active shadow-sm">
+        <a href="interplanetary.html" class="font-sans font-bold uppercase text-xs tracking-widest text-gray-500 hover:text-gray-800 transition-colors">← Interplanetary Hub</a>
+        <a href="#book" class="border border-gray-400 text-gray-500 px-6 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-gray-500 hover:text-white transition-colors">Book Now</a>
+    </nav>
+
+    <main class="min-h-screen flex items-center justify-center pt-24 pb-12 px-4 lg:px-20 relative z-10">
+        <div class="w-full max-w-[1200px] flex flex-col-reverse lg:flex-row items-center gap-16">
+            
+            <div class="w-full lg:w-1/2 text-center lg:text-left reveal">
+                <h1 class="text-[5rem] lg:text-[8rem] font-serif text-outline mb-2">VENUS</h1>
+                <h2 class="text-2xl font-bold uppercase tracking-widest text-[#D1A796] mb-8">See you at the Cloud 9 Observatory</h2>
+                <p class="text-gray-500 text-lg leading-relaxed mb-10 max-w-md mx-auto lg:mx-0">
+                    Voted <span class="font-serif italic text-xl">Best</span> place in the solar system to watch the Mercury transit. Experience absolute luxury suspended high above the harsh surface.
+                </p>
+                <a href="#book" class="inline-block px-10 py-4 bg-white text-gray-500 shadow-md rounded-full font-bold text-xs uppercase tracking-widest hover:shadow-xl transition-all">Secure a Suite</a>
+            </div>
+
+            <div class="w-full lg:w-1/2 flex justify-center reveal delay-200">
+                <div class="w-full max-w-md rounded-t-full rounded-b-lg overflow-hidden shadow-2xl border-4 border-white">
+                    <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/venus.width-1320.jpg" alt="Venus Poster" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver(e => e.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); }));
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
