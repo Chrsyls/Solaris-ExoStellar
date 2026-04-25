@@ -10,19 +10,66 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { kPaper: '#EFEAE0', kRed: '#D63230', kNavy: '#1E293B', kSand: '#D9CDBF' },
-                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Manrope"', 'sans-serif'] },
-                    animation: { 'float': 'float 6s ease-in-out infinite', 'spin-slow': 'spin 20s linear infinite' },
-                    keyframes: { float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } } }
+                    colors: {
+                        kPaper: '#EFEAE0',
+                        kRed: '#D63230',
+                        kNavy: '#1E293B',
+                        kSand: '#D9CDBF',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Manrope"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 7s ease-in-out infinite 2s',
+                        'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #EFEAE0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E"); }
-        .glass-panel { background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(16px); border-top: 1px solid rgba(255, 255, 255, 0.6); }
-        .text-hollow { -webkit-text-stroke: 1.5px #1E293B; color: transparent; }
-        .capsule-shadow { box-shadow: -20px 20px 60px rgba(214, 50, 48, 0.15), 20px -20px 60px rgba(255, 255, 255, 0.5); }
+        body {
+            background-color: #EFEAE0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
+            border-left: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 40px rgba(30, 41, 59, 0.05);
+        }
+        .capsule-shadow {
+            box-shadow: -20px 20px 60px rgba(214, 50, 48, 0.15), 20px -20px 60px rgba(255, 255, 255, 0.5);
+        }
+        .text-hollow {
+            -webkit-text-stroke: 1.5px #1E293B;
+            color: transparent;
+        }
+        .form-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(30, 41, 59, 0.2);
+            padding: 12px 0;
+            width: 100%;
+            font-family: 'Manrope', sans-serif;
+            color: #1E293B;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .form-input:focus { border-bottom-color: #D63230; }
+        .form-input::placeholder { color: rgba(30, 41, 59, 0.4); }
+        ::selection { background: #D63230; color: #EFEAE0; }
         html { scroll-behavior: smooth; }
 
         /* Animasi Scroll */
@@ -30,10 +77,10 @@
         .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal-right { opacity: 0; transform: translateX(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0, 0); }
-        
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
     </style>
 </head>
 <body class="text-kNavy font-sans relative selection:bg-kRed selection:text-kPaper overflow-x-hidden">
@@ -47,13 +94,15 @@
             </div>
             <span class="hidden sm:inline text-lg font-serif font-bold tracking-wide">Solaris<span class="font-sans font-light text-kRed ml-1 tracking-[0.2em] text-xs uppercase">Exostellar</span></span>
         </a>
+        
         <div class="hidden lg:flex space-x-12 text-xs font-bold tracking-[0.15em] uppercase text-kNavy/80">
             <a href="index.html" class="hover:text-kRed transition-colors duration-300">Dashboard</a>
             <a href="#about" class="hover:text-kRed transition-colors duration-300">About</a>
             <a href="#expeditions" class="hover:text-kRed transition-colors duration-300">Expeditions</a>
             <a href="#habitats" class="hover:text-kRed transition-colors duration-300">Habitats</a>
         </div>
-        <a href="hd40307g.html" class="flex items-center justify-center gap-2 bg-kNavy text-kPaper px-5 py-2 md:py-3 rounded-full hover:bg-kRed transition-all duration-300 shadow-md group">
+        
+        <a href="hd40307g.html" class="flex items-center justify-center gap-2 bg-kNavy text-kPaper px-5 py-2 md:py-3 rounded-full hover:bg-kRed transition-all duration-300 shadow-md group border border-kNavy/20">
             <span class="hidden md:inline text-[10px] uppercase tracking-widest font-bold opacity-70">Next:</span>
             <span class="font-serif font-bold text-sm md:text-md tracking-wide">HD 40307g ↗</span>
         </a>
@@ -61,29 +110,36 @@
 
     <section id="home" class="min-h-screen flex flex-col pt-32 pb-12 relative z-10 w-full max-w-[1600px] mx-auto px-8 md:px-16">
         <div class="flex-grow flex flex-col lg:flex-row items-center justify-between relative">
+            
             <div class="w-full lg:w-5/12 flex flex-col justify-center relative z-20 reveal-left delay-100">
                 <p class="text-kRed font-bold tracking-[0.2em] uppercase text-sm mb-6 flex items-center gap-3">
                     <span class="w-8 h-[2px] bg-kRed inline-block"></span> Exoplanetary System
                 </p>
                 <h1 class="text-[3.5rem] md:text-[5rem] lg:text-[6rem] font-serif leading-[0.95] mb-6">
-                    The grass is <br><span class="text-kRed italic">always redder</span><br><span class="text-hollow">on the other side</span>
+                    The grass is <br>
+                    <span class="text-kRed italic">always redder</span><br>
+                    <span class="text-hollow">on the other side</span>
                 </h1>
                 <p class="text-kNavy/70 text-lg font-light mb-10 max-w-md leading-relaxed">
                     Leave the green behind. Discover a new balance under the light of a red dwarf star with our exclusive crimson flora.
                 </p>
+                
                 <div class="flex flex-col sm:flex-row gap-4 mt-2">
                     <a href="#expeditions" class="w-full sm:w-max group relative px-8 py-4 bg-kNavy text-kPaper font-bold text-sm tracking-widest uppercase overflow-hidden inline-block text-center shadow-lg">
                         <div class="absolute inset-0 bg-kRed transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
-                        <span class="relative z-10 flex items-center justify-center gap-3">View Expeditions</span>
+                        <span class="relative z-10 flex items-center justify-center gap-3">
+                            View Expeditions <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </span>
                     </a>
+                    
                     <a href="index.html" class="w-full sm:w-max flex items-center justify-center gap-2 bg-transparent border-2 border-kNavy/30 text-kNavy px-8 py-4 font-bold text-sm tracking-widest uppercase hover:bg-kNavy hover:text-kPaper transition-all duration-300">
                         Back to Dashboard ↩
                     </a>
                 </div>
             </div>
 
-            <div class="hidden lg:flex w-2/12 justify-center items-center relative z-10">
-                <div class="absolute w-64 h-64 border-[1px] border-kNavy/10 rounded-full animate-spin-slow reveal"></div>
+            <div class="hidden lg:flex w-2/12 justify-center items-center relative z-10 reveal">
+                <div class="absolute w-64 h-64 border-[1px] border-kNavy/10 rounded-full animate-spin-slow"></div>
                 <div class="glass-panel p-4 rounded-2xl w-48 animate-float-delayed relative shadow-xl reveal delay-200">
                     <p class="text-[10px] uppercase tracking-widest text-kNavy/50 mb-2 border-b border-kNavy/10 pb-2">Telemetry</p>
                     <div class="space-y-3">
@@ -128,19 +184,29 @@
             <div class="w-full md:w-1/2 relative reveal-left delay-100">
                 <div class="w-72 h-72 rounded-full border border-kNavy flex items-center justify-center relative p-4">
                     <div class="w-full h-full rounded-full bg-kSand/50 overflow-hidden mix-blend-multiply relative">
-                        <div class="absolute inset-0 opacity-80"><img src="https://i.etsystatic.com/48772695/r/il/364a80/6134142133/il_fullxfull.6134142133_684b.jpg" class="w-full h-full object-cover rounded-full"></div>
+                        <div class="absolute inset-0 opacity-80">
+                            <img src="https://i.etsystatic.com/48772695/r/il/364a80/6134142133/il_fullxfull.6134142133_684b.jpg" alt="Planet Kepler" class="w-full h-full object-cover rounded-full">
+                        </div>
                     </div>
+                    <div class="absolute top-[-5px] left-1/2 w-3 h-3 bg-kRed rounded-full"></div>
                 </div>
             </div>
             <div class="w-full md:w-1/2 reveal-right delay-200">
                 <h2 class="text-4xl md:text-5xl font-serif mb-6 text-kNavy">Redefining <br><span class="italic text-kRed">Human Expansion</span></h2>
-                <p class="text-kNavy/70 mb-6 leading-relaxed">Founded in 2042, Solaris Exostellar is the premier agency bridging the gap between Earth and the Kepler system.</p>
+                <p class="text-kNavy/70 mb-6 leading-relaxed">
+                    Founded in 2042, Solaris Exostellar is the premier agency bridging the gap between Earth and the Kepler system. We don't just offer transport; we offer a seamless transition into a new biosphere.
+                </p>
+                <p class="text-kNavy/70 mb-8 leading-relaxed">
+                    Our rigorous preparation protocols ensure that your physical and psychological adaptation to the crimson wavelengths of Kepler-186f is harmonized with nature.
+                </p>
                 <div class="grid grid-cols-2 gap-6">
                     <div class="border-l-2 border-kRed pl-4">
-                        <h4 class="font-bold text-2xl font-serif">100%</h4><p class="text-xs uppercase tracking-wider text-kNavy/60">Success Rate</p>
+                        <h4 class="font-bold text-2xl font-serif">100%</h4>
+                        <p class="text-xs uppercase tracking-wider text-kNavy/60">Success Rate</p>
                     </div>
                     <div class="border-l-2 border-kRed pl-4">
-                        <h4 class="font-bold text-2xl font-serif">30 Days</h4><p class="text-xs uppercase tracking-wider text-kNavy/60">Warp Duration</p>
+                        <h4 class="font-bold text-2xl font-serif">30 Days</h4>
+                        <p class="text-xs uppercase tracking-wider text-kNavy/60">Warp Duration</p>
                     </div>
                 </div>
             </div>
@@ -151,34 +217,45 @@
         <div class="max-w-[1400px] mx-auto px-8 md:px-16">
             <div class="text-center mb-16 reveal">
                 <h2 class="text-4xl md:text-5xl font-serif text-kNavy mb-4">Upcoming <span class="italic text-kRed">Departures</span></h2>
+                <p class="text-kNavy/60 max-w-lg mx-auto">Secure your boarding pass for the next interstellar transfer. Spots are highly limited.</p>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group reveal delay-100">
+                <div class="glass-panel p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden group reveal delay-100">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-kRed/10 rounded-bl-full -z-10 group-hover:bg-kRed/20 transition-colors"></div>
+                    <p class="text-xs font-bold tracking-widest text-kRed uppercase mb-2">Flight X-11</p>
                     <h3 class="font-serif text-3xl mb-4">Crimson Valley</h3>
                     <ul class="text-sm text-kNavy/70 space-y-2 mb-8">
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Departure:</span> <strong>Q3 2045</strong></li>
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Duration:</span> <strong>Permanent</strong></li>
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Capacity:</span> <strong>120 Pax</strong></li>
                     </ul>
-                    <button class="w-full py-3 border border-kNavy text-kNavy hover:bg-kNavy hover:text-kPaper transition-colors font-bold text-sm tracking-widest uppercase">Reserve Slot</button>
+                    <button onclick="openBookingModal('Flight X-11')" class="w-full py-3 border border-kNavy text-kNavy hover:bg-kNavy hover:text-kPaper transition-colors font-bold text-sm tracking-widest uppercase">Reserve Slot</button>
                 </div>
-                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group border-kRed/30 reveal delay-200">
+
+                <div class="glass-panel p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden group border-kRed/30 reveal delay-200">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-kRed/10 rounded-bl-full -z-10 group-hover:bg-kRed/20 transition-colors"></div>
+                    <div class="absolute top-4 right-4 bg-kRed text-white text-[10px] px-2 py-1 uppercase tracking-widest font-bold">Fast Filling</div>
+                    <p class="text-xs font-bold tracking-widest text-kRed uppercase mb-2">Flight X-12</p>
                     <h3 class="font-serif text-3xl mb-4">Dusk Highlands</h3>
                     <ul class="text-sm text-kNavy/70 space-y-2 mb-8">
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Departure:</span> <strong>Q1 2046</strong></li>
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Duration:</span> <strong>2 Years Return</strong></li>
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Capacity:</span> <strong>80 Pax</strong></li>
                     </ul>
-                    <button class="w-full py-3 bg-kNavy text-kPaper hover:bg-kRed transition-colors font-bold text-sm tracking-widest uppercase">Reserve Slot</button>
+                    <button onclick="openBookingModal('Flight X-12')" class="w-full py-3 bg-kNavy text-kPaper hover:bg-kRed transition-colors font-bold text-sm tracking-widest uppercase">Reserve Slot</button>
                 </div>
-                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group reveal delay-300">
+
+                <div class="glass-panel p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden group reveal delay-300">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-kRed/10 rounded-bl-full -z-10 group-hover:bg-kRed/20 transition-colors"></div>
+                    <p class="text-xs font-bold tracking-widest text-kRed uppercase mb-2">Flight X-14</p>
                     <h3 class="font-serif text-3xl mb-4">Equatorial Post</h3>
                     <ul class="text-sm text-kNavy/70 space-y-2 mb-8">
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Departure:</span> <strong>Q4 2046</strong></li>
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Duration:</span> <strong>Research (6 Mo)</strong></li>
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Capacity:</span> <strong>30 Pax</strong></li>
                     </ul>
-                    <button class="w-full py-3 border border-kNavy text-kNavy hover:bg-kNavy hover:text-kPaper transition-colors font-bold text-sm tracking-widest uppercase">Reserve Slot</button>
+                    <button onclick="openBookingModal('Flight X-14')" class="w-full py-3 border border-kNavy text-kNavy hover:bg-kNavy hover:text-kPaper transition-colors font-bold text-sm tracking-widest uppercase">Reserve Slot</button>
                 </div>
             </div>
         </div>
@@ -235,6 +312,7 @@
             
             <div class="w-full md:w-7/12 reveal-right delay-200">
                 <form id="contactForm" onsubmit="handleFirebaseSubmit(event)" class="glass-panel !bg-white/5 !border-white/10 p-8 md:p-10 rounded-2xl relative">
+                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                         <div>
                             <label for="fullName" class="text-[10px] uppercase tracking-widest text-kRed font-bold">Full Designation</label>
@@ -245,14 +323,19 @@
                             <input type="email" id="email" name="email" placeholder="john@earth.com" required class="form-input !text-white !border-white/20 focus:!border-kRed placeholder-white/30">
                         </div>
                     </div>
+                    
                     <div class="mb-10">
                         <label for="message" class="text-[10px] uppercase tracking-widest text-kRed font-bold">Message Payload</label>
                         <textarea id="message" name="message" rows="4" placeholder="Requesting details on..." required class="form-input !text-white !border-white/20 focus:!border-kRed placeholder-white/30 resize-none"></textarea>
                     </div>
+
                     <button type="submit" class="w-full py-4 bg-kRed text-white hover:bg-white hover:text-kRed transition-colors font-bold text-sm tracking-widest uppercase">
                         Transmit Data
                     </button>
-                    <div id="successMsg" class="hidden mt-4 text-sm text-green-400 text-center font-mono">Transmission received successfully.</div>
+                    
+                    <div id="successMsg" class="hidden mt-4 text-sm text-green-400 text-center font-mono">
+                        Transmission received successfully.
+                    </div>
                 </form>
             </div>
         </div>
@@ -263,6 +346,7 @@
     </footer>
 
     <script>
+        // Animasi Scroll (Intersection Observer)
         document.addEventListener("DOMContentLoaded", () => {
             const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
@@ -271,14 +355,18 @@
                         obs.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.15 });
 
             document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
         });
 
-        // Simulasi Form Firebase
+        // Firebase Form Submit Simulation
         function handleFirebaseSubmit(event) {
             event.preventDefault(); 
+            const name = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
             const btn = event.target.querySelector('button');
             const originalText = btn.innerText;
             btn.innerText = "Transmitting...";
@@ -291,6 +379,10 @@
                     document.getElementById('successMsg').classList.add('hidden');
                 }, 3000);
             }, 1000);
+        }
+
+        function openBookingModal(flightName) {
+            alert(`Sistem Integrasi: Buka modal/form booking untuk ${flightName}. Data ini bisa langsung dikirim ke Firebase.`);
         }
     </script>
 </body>
