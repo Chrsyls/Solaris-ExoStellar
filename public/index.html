@@ -15,8 +15,8 @@
                         kGold: '#D6A04B',
                         kDeepBlue: '#0B2744',
                         kSky: '#72A1B8',
-                        kMars: '#C1440E', /* Tambahan warna Mars untuk hover */
-                        kRed: '#8B0000',  /* Tambahan warna Merah Void untuk hover */
+                        kMars: '#C1440E', 
+                        kRed: '#8B0000',  
                     },
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
@@ -79,18 +79,20 @@
                 <p class="text-kPaper/70 text-lg mb-10 leading-relaxed reveal-left delay-300">Selamat datang di pusat komando Solaris Exostellar. Pilih jangkauan perjalanan Anda dan mulailah ekspedisi lintas dimensi.</p>
                 
                 <div class="flex flex-wrap gap-4 reveal-left delay-300">
-                    <div class="glass-panel px-6 py-4 rounded-2xl flex items-center gap-4">
-                        <div class="text-kGold text-2xl font-black">01</div>
-                        <div class="text-[10px] uppercase tracking-widest font-bold">Interplanetary<br><span class="opacity-50 font-normal">Within Sol System</span></div>
-                    </div>
-                    <div class="glass-panel px-6 py-4 rounded-2xl flex items-center gap-4">
+                    <a href="interplanetary.html" class="glass-panel px-6 py-4 rounded-2xl flex items-center gap-4 hover:bg-white/10 hover:border-kMars hover:-translate-y-1 transition-all cursor-pointer group">
+                        <div class="text-kGold text-2xl font-black group-hover:text-kMars transition-colors">01</div>
+                        <div class="text-[10px] uppercase tracking-widest font-bold">Interplanetary<br><span class="opacity-50 font-normal group-hover:opacity-100 transition-opacity">Within Sol System</span></div>
+                    </a>
+                    
+                    <a href="interstellar.html" class="glass-panel px-6 py-4 rounded-2xl flex items-center gap-4 hover:bg-white/10 hover:border-kGold hover:-translate-y-1 transition-all cursor-pointer group">
                         <div class="text-kGold text-2xl font-black">02</div>
-                        <div class="text-[10px] uppercase tracking-widest font-bold">Interstellar<br><span class="opacity-50 font-normal">Beyond our Sun</span></div>
-                    </div>
-                    <div class="glass-panel px-6 py-4 rounded-2xl flex items-center gap-4">
-                        <div class="text-kGold text-2xl font-black">03</div>
-                        <div class="text-[10px] uppercase tracking-widest font-bold">Intergalactic<br><span class="opacity-50 font-normal">The Void Between</span></div>
-                    </div>
+                        <div class="text-[10px] uppercase tracking-widest font-bold">Interstellar<br><span class="opacity-50 font-normal group-hover:opacity-100 transition-opacity">Beyond our Sun</span></div>
+                    </a>
+                    
+                    <a href="intergalactic.html" class="glass-panel px-6 py-4 rounded-2xl flex items-center gap-4 hover:bg-white/10 hover:border-kRed hover:-translate-y-1 transition-all cursor-pointer group">
+                        <div class="text-kGold text-2xl font-black group-hover:text-kRed transition-colors">03</div>
+                        <div class="text-[10px] uppercase tracking-widest font-bold">Intergalactic<br><span class="opacity-50 font-normal group-hover:opacity-100 transition-opacity">The Void Between</span></div>
+                    </a>
                 </div>
             </div>
         </div>
