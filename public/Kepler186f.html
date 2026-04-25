@@ -21,15 +21,16 @@
     <style>
         body { background-color: #EFEAE0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E"); }
         .glass-panel { background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(16px); border-top: 1px solid rgba(255, 255, 255, 0.6); }
-        .capsule-shadow { box-shadow: -20px 20px 60px rgba(214, 50, 48, 0.15), 20px -20px 60px rgba(255, 255, 255, 0.5); }
         .text-hollow { -webkit-text-stroke: 1.5px #1E293B; color: transparent; }
+        .capsule-shadow { box-shadow: -20px 20px 60px rgba(214, 50, 48, 0.15), 20px -20px 60px rgba(255, 255, 255, 0.5); }
         html { scroll-behavior: smooth; }
 
-        /* Animasi Kustom */
+        /* Animasi Scroll */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal-right { opacity: 0; transform: translateX(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0, 0); }
+        
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
@@ -81,11 +82,32 @@
                 </div>
             </div>
 
+            <div class="hidden lg:flex w-2/12 justify-center items-center relative z-10">
+                <div class="absolute w-64 h-64 border-[1px] border-kNavy/10 rounded-full animate-spin-slow reveal"></div>
+                <div class="glass-panel p-4 rounded-2xl w-48 animate-float-delayed relative shadow-xl reveal delay-200">
+                    <p class="text-[10px] uppercase tracking-widest text-kNavy/50 mb-2 border-b border-kNavy/10 pb-2">Telemetry</p>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-[9px] uppercase tracking-wider text-kRed">Distance</p>
+                            <p class="font-serif font-bold text-lg">582 <span class="text-xs font-sans font-normal">Ly</span></p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] uppercase tracking-wider text-kRed">Star Type</p>
+                            <p class="font-serif font-bold text-lg">M-Dwarf</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] uppercase tracking-wider text-kRed">Gravity</p>
+                            <p class="font-serif font-bold text-lg">1.04 <span class="text-xs font-sans font-normal">G</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="w-full lg:w-5/12 flex justify-center lg:justify-end mt-16 lg:mt-0 relative z-20 reveal-right delay-200">
                 <div class="relative w-[300px] md:w-[380px] h-[480px] md:h-[550px] animate-float">
                     <div class="absolute inset-0 rounded-[100px] glass-panel capsule-shadow overflow-hidden flex flex-col justify-end p-8 border-2 border-white/40 z-10 group">
                         <div class="absolute inset-0 -z-10 group-hover:scale-105 transition-transform duration-700">
-                            <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/exo-explore/2023/09/wallpaper_kepler_186f.jpeg?w=1920&h=1080&fit=clip&crop=faces%2Cfocalpoint" class="w-full h-full object-cover opacity-90">
+                            <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/exo-explore/2023/09/wallpaper_kepler_186f.jpeg?w=1920&h=1080&fit=clip&crop=faces%2Cfocalpoint" alt="Kepler Flora" class="w-full h-full object-cover opacity-90">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                         </div>
                         <div class="relative z-20 text-kPaper drop-shadow-lg">
@@ -135,6 +157,8 @@
                     <h3 class="font-serif text-3xl mb-4">Crimson Valley</h3>
                     <ul class="text-sm text-kNavy/70 space-y-2 mb-8">
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Departure:</span> <strong>Q3 2045</strong></li>
+                        <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Duration:</span> <strong>Permanent</strong></li>
+                        <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Capacity:</span> <strong>120 Pax</strong></li>
                     </ul>
                     <button class="w-full py-3 border border-kNavy text-kNavy hover:bg-kNavy hover:text-kPaper transition-colors font-bold text-sm tracking-widest uppercase">Reserve Slot</button>
                 </div>
@@ -142,6 +166,8 @@
                     <h3 class="font-serif text-3xl mb-4">Dusk Highlands</h3>
                     <ul class="text-sm text-kNavy/70 space-y-2 mb-8">
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Departure:</span> <strong>Q1 2046</strong></li>
+                        <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Duration:</span> <strong>2 Years Return</strong></li>
+                        <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Capacity:</span> <strong>80 Pax</strong></li>
                     </ul>
                     <button class="w-full py-3 bg-kNavy text-kPaper hover:bg-kRed transition-colors font-bold text-sm tracking-widest uppercase">Reserve Slot</button>
                 </div>
@@ -149,12 +175,92 @@
                     <h3 class="font-serif text-3xl mb-4">Equatorial Post</h3>
                     <ul class="text-sm text-kNavy/70 space-y-2 mb-8">
                         <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Departure:</span> <strong>Q4 2046</strong></li>
+                        <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Duration:</span> <strong>Research (6 Mo)</strong></li>
+                        <li class="flex justify-between border-b border-kNavy/10 pb-1"><span>Capacity:</span> <strong>30 Pax</strong></li>
                     </ul>
                     <button class="w-full py-3 border border-kNavy text-kNavy hover:bg-kNavy hover:text-kPaper transition-colors font-bold text-sm tracking-widest uppercase">Reserve Slot</button>
                 </div>
             </div>
         </div>
     </section>
+
+    <section id="habitats" class="py-24 relative w-full max-w-[1400px] mx-auto px-8 md:px-16">
+        <div class="flex flex-col-reverse md:flex-row items-center gap-16">
+            <div class="w-full md:w-1/2">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="glass-panel p-6 rounded-xl reveal delay-100">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center mb-4 text-xl shadow-sm">🌿</div>
+                        <h4 class="font-serif font-bold text-xl mb-2">Red Biosphere</h4>
+                        <p class="text-sm text-kNavy/70">Engineered domes that replicate the exact photosynthetic frequency needed by native flora.</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl sm:translate-y-8 reveal delay-200">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center mb-4 text-xl shadow-sm">💨</div>
+                        <h4 class="font-serif font-bold text-xl mb-2">Synthetic Atmo</h4>
+                        <p class="text-sm text-kNavy/70">Breathe easy. Our atmospheric processors perfectly balance oxygen and native gases.</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl reveal delay-300">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center mb-4 text-xl shadow-sm">🛡️</div>
+                        <h4 class="font-serif font-bold text-xl mb-2">Solar Shielding</h4>
+                        <p class="text-sm text-kNavy/70">Advanced transparent polymers that block harmful flares from the M-Dwarf star.</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl sm:translate-y-8 reveal delay-400">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center mb-4 text-xl shadow-sm">🏡</div>
+                        <h4 class="font-serif font-bold text-xl mb-2">Suburban Comfort</h4>
+                        <p class="text-sm text-kNavy/70">Experience familiar white picket fences, reimagined for extra-terrestrial terrain.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 reveal-right delay-200">
+                <h2 class="text-4xl md:text-5xl font-serif mb-6 text-kNavy">Engineered for <br><span class="italic text-kRed">Human Harmony</span></h2>
+                <p class="text-kNavy/70 leading-relaxed">
+                    Living on Kepler-186f doesn't mean sacrificing comfort. Our habitats are a marvel of retro-futuristic engineering, combining the idyllic aesthetic of mid-century Earth with cutting-edge survival technology.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 relative w-full bg-kNavy text-kPaper">
+        <div class="max-w-[1200px] mx-auto px-8 md:px-16 flex flex-col md:flex-row gap-16">
+            <div class="w-full md:w-5/12 reveal-left delay-100">
+                <h2 class="text-4xl md:text-5xl font-serif mb-6">Open <span class="italic text-kRed">Frequencies</span></h2>
+                <p class="text-kPaper/70 mb-10 leading-relaxed">
+                    Have questions regarding aptitude assessments, flight manifests, or habitat specifications? Send a transmission to our control center.
+                </p>
+                <div class="space-y-4 text-sm text-kPaper/60 font-mono">
+                    <p>COM-LINK: +1 (800) EXOPLANET</p>
+                    <p>NODE: Houston Sector, Earth</p>
+                    <p>LATENCY: 5.2ms (Sub-space)</p>
+                </div>
+            </div>
+            
+            <div class="w-full md:w-7/12 reveal-right delay-200">
+                <form id="contactForm" onsubmit="handleFirebaseSubmit(event)" class="glass-panel !bg-white/5 !border-white/10 p-8 md:p-10 rounded-2xl relative">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <label for="fullName" class="text-[10px] uppercase tracking-widest text-kRed font-bold">Full Designation</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="John Doe" required class="form-input !text-white !border-white/20 focus:!border-kRed placeholder-white/30">
+                        </div>
+                        <div>
+                            <label for="email" class="text-[10px] uppercase tracking-widest text-kRed font-bold">Transmission Email</label>
+                            <input type="email" id="email" name="email" placeholder="john@earth.com" required class="form-input !text-white !border-white/20 focus:!border-kRed placeholder-white/30">
+                        </div>
+                    </div>
+                    <div class="mb-10">
+                        <label for="message" class="text-[10px] uppercase tracking-widest text-kRed font-bold">Message Payload</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Requesting details on..." required class="form-input !text-white !border-white/20 focus:!border-kRed placeholder-white/30 resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-kRed text-white hover:bg-white hover:text-kRed transition-colors font-bold text-sm tracking-widest uppercase">
+                        Transmit Data
+                    </button>
+                    <div id="successMsg" class="hidden mt-4 text-sm text-green-400 text-center font-mono">Transmission received successfully.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 bg-[#151c28] text-center border-t border-white/10 text-white/40 text-xs font-mono reveal">
+        <p>&copy; 2042 Solaris Exostellar. A division of retro-futuristic exploration.</p>
+    </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -169,6 +275,23 @@
 
             document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
         });
+
+        // Simulasi Form Firebase
+        function handleFirebaseSubmit(event) {
+            event.preventDefault(); 
+            const btn = event.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "Transmitting...";
+            
+            setTimeout(() => {
+                document.getElementById('successMsg').classList.remove('hidden');
+                event.target.reset();
+                btn.innerText = originalText;
+                setTimeout(() => {
+                    document.getElementById('successMsg').classList.add('hidden');
+                }, 3000);
+            }, 1000);
+        }
     </script>
 </body>
 </html>

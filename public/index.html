@@ -10,8 +10,16 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { kPaper: '#EAE6DB', kGold: '#D6A04B', kDeepBlue: '#0B2744', kSky: '#72A1B8' },
-                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Manrope"', 'sans-serif'] }
+                    colors: {
+                        kPaper: '#EAE6DB',
+                        kGold: '#D6A04B',
+                        kDeepBlue: '#0B2744',
+                        kSky: '#72A1B8',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Manrope"', 'sans-serif'],
+                    }
                 }
             }
         }
@@ -23,13 +31,18 @@
             color: #0B2744;
         }
         .rounded-flygo { border-radius: 40px; }
-        .glass-panel { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.5); }
-        
-        /* Animasi Kustom */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animasi Scroll */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal-right { opacity: 0; transform: translateX(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0, 0); }
+        
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
@@ -61,6 +74,21 @@
                 <p class="text-kGold font-bold tracking-[0.3em] uppercase text-xs mb-6 reveal-left delay-200">Gateway to the Stars</p>
                 <h1 class="text-5xl lg:text-8xl font-sans font-black leading-none uppercase mb-8 reveal-left delay-300">Universal<br>Travel Bureau</h1>
                 <p class="text-kPaper/70 text-lg mb-10 leading-relaxed reveal-left delay-300">Selamat datang di pusat komando Solaris Exostellar. Pilih jangkauan perjalanan Anda dan mulailah ekspedisi lintas dimensi.</p>
+                
+                <div class="flex flex-wrap gap-4 reveal-left delay-300">
+                    <div class="glass-panel px-6 py-4 rounded-2xl flex items-center gap-4">
+                        <div class="text-kGold text-2xl font-black">01</div>
+                        <div class="text-[10px] uppercase tracking-widest font-bold">Interplanetary<br><span class="opacity-50 font-normal">Within Sol System</span></div>
+                    </div>
+                    <div class="glass-panel px-6 py-4 rounded-2xl flex items-center gap-4">
+                        <div class="text-kGold text-2xl font-black">02</div>
+                        <div class="text-[10px] uppercase tracking-widest font-bold">Interstellar<br><span class="opacity-50 font-normal">Beyond our Sun</span></div>
+                    </div>
+                    <div class="glass-panel px-6 py-4 rounded-2xl flex items-center gap-4">
+                        <div class="text-kGold text-2xl font-black">03</div>
+                        <div class="text-[10px] uppercase tracking-widest font-bold">Intergalactic<br><span class="opacity-50 font-normal">The Void Between</span></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -77,6 +105,7 @@
                 <div class="w-12 h-12 rounded-full bg-kGold text-kDeepBlue flex items-center justify-center font-bold mb-6">S2</div>
                 <h2 class="text-2xl font-serif font-bold mb-4">Interstellar</h2>
                 <p class="text-sm text-kDeepBlue/80 mb-8 leading-relaxed italic">"Beyond the Kuiper belt. Our most popular routes to habitable super-earths."</p>
+                
                 <div class="w-full space-y-4">
                     <a href="Kepler186f.html" class="flex justify-between items-center w-full p-4 bg-white/50 rounded-2xl border border-kDeepBlue/10 hover:bg-kDeepBlue hover:text-kPaper transition-all group/btn">
                         <span class="font-bold text-sm">Kepler-186f</span>
