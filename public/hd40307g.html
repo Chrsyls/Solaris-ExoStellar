@@ -10,283 +10,121 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        kPaper: '#EAE6DB',
-                        kGold: '#D6A04B',
-                        kDeepBlue: '#0B2744',
-                        kSky: '#72A1B8',
-                    },
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['"Manrope"', 'sans-serif'],
-                    }
+                    colors: { kPaper: '#EAE6DB', kGold: '#D6A04B', kDeepBlue: '#0B2744', kSky: '#72A1B8' },
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Manrope"', 'sans-serif'] }
                 }
             }
         }
     </script>
     <style>
-        body {
-            background-color: #EAE6DB;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-            color: #0B2744;
-            scroll-behavior: smooth;
-        }
-        .text-outline {
-            -webkit-text-stroke: 1.5px #0B2744;
-            color: transparent;
-        }
+        body { background-color: #EAE6DB; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E"); color: #0B2744; scroll-behavior: smooth; }
+        .text-outline { -webkit-text-stroke: 1.5px #0B2744; color: transparent; }
         .rounded-flygo { border-radius: 40px; }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        ::selection { background: #D6A04B; color: #0B2744; }
+        .glass-panel { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.5); }
+        
+        /* Animasi Kustom */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-right { opacity: 0; transform: translateX(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0, 0); }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
     </style>
 </head>
-<body class="font-sans antialiased relative selection:bg-kGold selection:text-kDeepBlue overflow-x-hidden">
+<body class="font-sans antialiased relative overflow-x-hidden">
 
-    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel border-b border-white/20">
-        <a href="#home" class="flex items-center gap-2 group cursor-pointer">
-            <span class="text-2xl font-serif font-black tracking-wider uppercase text-kDeepBlue">
-                Solaris<span class="text-kGold text-sm align-top">®</span>
-            </span>
+    <nav class="fixed top-0 w-full flex justify-between items-center py-5 px-8 lg:px-20 z-50 glass-panel border-b border-white/20 reveal active">
+        <a href="index.html" class="flex items-center gap-2 group cursor-pointer">
+            <span class="text-2xl font-serif font-black tracking-wider uppercase text-kDeepBlue">Solaris<span class="text-kGold text-sm align-top">®</span></span>
         </a>
-
         <div class="hidden lg:flex space-x-10 text-sm font-bold tracking-wide text-kDeepBlue">
-            <a href="#home" class="hover:text-kGold transition-colors">Home</a>
+            <a href="index.html" class="hover:text-kGold transition-colors">Dashboard</a>
             <a href="#about" class="hover:text-kGold transition-colors">About planet</a>
             <a href="#expeditions" class="hover:text-kGold transition-colors">Expeditions</a>
             <a href="#reviews" class="hover:text-kGold transition-colors">Reviews</a>
             <a href="#logs" class="hover:text-kGold transition-colors">Logs</a>
         </div>
-
         <div class="flex items-center space-x-6 text-sm font-bold text-kDeepBlue">
-            <span class="hidden md:inline cursor-pointer hover:text-kGold">EN ⌄</span>
-            <a href="#contact" class="bg-kDeepBlue text-kPaper px-8 py-3 rounded-full hover:bg-kGold hover:text-kDeepBlue transition-all">
-                Contact
-            </a>
+            <a href="#contact" class="bg-kDeepBlue text-kPaper px-8 py-3 rounded-full hover:bg-kGold hover:text-kDeepBlue transition-all">Contact</a>
         </div>
     </nav>
 
     <section id="home" class="w-full px-4 lg:px-20 pt-32 pb-12 relative z-10 min-h-screen flex items-center">
-        <div class="w-full rounded-flygo bg-gradient-to-br from-kSky/40 via-kPaper to-kGold/20 p-8 lg:p-16 relative flex flex-col lg:flex-row items-center border border-white/50 shadow-sm">
-            
-            <div class="w-full lg:w-1/2 z-20 relative bg-kPaper/80 lg:bg-transparent p-6 lg:p-0 rounded-3xl lg:rounded-none backdrop-blur-sm lg:backdrop-blur-none mt-40 lg:mt-0">
-                <div class="flex items-start gap-4 mb-10 max-w-sm">
-                    <div class="w-8 h-[2px] bg-kDeepBlue mt-2 shrink-0"></div>
-                    <p class="text-xs font-semibold leading-relaxed text-kDeepBlue/80">
-                        As an interstellar entity, we provide high-G orbital drops and extreme gravity exploration packages.
-                    </p>
-                </div>
-
-                <h1 class="text-4xl sm:text-[4rem] lg:text-[6rem] xl:text-[7rem] font-sans font-black leading-[0.9] uppercase tracking-tighter text-kDeepBlue break-words">
-    EXPERIENCE<br>
-    THE GRAVITY<br>
-    <span class="text-kGold text-outline font-serif italic font-normal tracking-normal">Of a Super</span><br>
-    EARTH
-</h1>
-
+        <div class="w-full rounded-flygo bg-gradient-to-br from-kSky/40 via-kPaper to-kGold/20 p-8 lg:p-16 relative flex flex-col lg:flex-row items-center border border-white/50 shadow-sm reveal delay-100">
+            <div class="w-full lg:w-1/2 z-20 relative bg-kPaper/80 lg:bg-transparent p-6 lg:p-0 rounded-3xl lg:rounded-none backdrop-blur-sm lg:backdrop-blur-none mt-40 lg:mt-0 reveal-left delay-200">
+                <p class="text-xs font-semibold leading-relaxed text-kDeepBlue/80 mb-10">As an interstellar entity, we provide high-G orbital drops and extreme gravity exploration packages.</p>
+                <h1 class="text-4xl sm:text-[4rem] lg:text-[6rem] xl:text-[7rem] font-sans font-black leading-[0.9] uppercase tracking-tighter text-kDeepBlue break-words">EXPERIENCE<br>THE GRAVITY<br><span class="text-kGold text-outline font-serif italic font-normal tracking-normal">Of a Super</span><br>EARTH</h1>
                 <div class="flex flex-col sm:flex-row gap-4 mt-12">
                     <a href="#expeditions" class="w-full sm:w-max group relative px-8 py-4 bg-kDeepBlue text-kPaper font-bold text-sm tracking-widest uppercase overflow-hidden inline-block text-center shadow-lg">
-                        <div class="absolute inset-0 bg-kGold transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
-                        <span class="relative z-10 flex items-center justify-center gap-3 group-hover:text-kDeepBlue transition-colors">
-                            Book The Drop <svg class="w-4 h-4 transform group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-                        </span>
+                        <span class="relative z-10 flex items-center justify-center gap-3">Book The Drop</span>
                     </a>
-                    
-                    <a href="index.html" class="w-full sm:w-max flex items-center justify-center gap-2 bg-transparent border-2 border-kDeepBlue/30 text-kDeepBlue px-8 py-4 font-bold text-sm tracking-widest uppercase hover:bg-kDeepBlue hover:text-kPaper transition-all duration-300">
+                    <a href="Kepler186f.html" class="w-full sm:w-max flex items-center justify-center gap-2 bg-transparent border-2 border-kDeepBlue/30 text-kDeepBlue px-8 py-4 font-bold text-sm tracking-widest uppercase hover:bg-kDeepBlue hover:text-kPaper transition-all duration-300">
                         Switch to Kepler-186f ↗
                     </a>
                 </div>
             </div>
-
-            <div class="w-full lg:w-1/2 absolute lg:relative top-0 right-0 lg:h-full flex justify-end p-4 lg:p-0 -z-10 lg:z-10">
+            <div class="w-full lg:w-1/2 absolute lg:relative top-0 right-0 lg:h-full flex justify-end p-4 lg:p-0 -z-10 lg:z-10 reveal-right delay-300">
                 <div class="w-full lg:w-[110%] h-[400px] lg:h-[600px] rounded-flygo overflow-hidden shadow-2xl relative lg:-mr-12 lg:-mt-12 border-4 border-kPaper">
-                    <img src="https://assets.science.nasa.gov/content/dam/science/astro/exo-explore/2023/09/t/travel_bureau_hd40307g_th.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg" alt="HD 40307g" class="w-full h-full object-cover object-top opacity-95">
+                    <img src="https://assets.science.nasa.gov/dynamicimage/assets/science/astro/exo-explore/2023/09/hd_40307g_1-1.jpg?w=1024&h=1536&fit=clip&crop=faces%2Cfocalpoint" alt="HD 40307g" class="w-full h-full object-cover object-top opacity-95">
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="w-full px-8 lg:px-20 py-24 flex flex-col lg:flex-row gap-16 justify-between items-start border-t border-kDeepBlue/10">
-        <div class="w-full lg:w-1/4">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-kDeepBlue leading-loose">
-                About the Planet<br>
-                Sector HD 40307g
-            </h3>
-        </div>
-
-        <div class="w-full lg:w-2/4">
-            <h2 class="text-3xl lg:text-4xl font-sans font-bold leading-snug mb-10 text-kDeepBlue">
-                We're working to accelerate human expansion within the <span class="text-kDeepBlue/40">mini-Neptune systems</span> by bringing together daring explorers. This means we can empower people to experience <span class="text-kGold italic font-serif">eight times the mass</span> of Earth.
-            </h2>
-            <a href="#expeditions" class="inline-block px-10 py-4 border border-kDeepBlue rounded-full text-sm font-bold hover:bg-kDeepBlue hover:text-kPaper transition-colors">
-                View parameters
-            </a>
-        </div>
-
-        <div class="w-full lg:w-1/4 flex justify-end">
-            <div class="w-[280px] h-[320px] rounded-[30px] overflow-hidden shadow-lg border-2 border-kPaper relative">
-                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1000&auto=format&fit=crop" alt="Atmospheric Flight" class="w-full h-full object-cover opacity-90">
-                <div class="absolute inset-0 bg-kDeepBlue/20 mix-blend-overlay"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="expeditions" class="py-24 relative w-full bg-kDeepBlue text-kPaper">
+    <section id="expeditions" class="py-24 relative w-full bg-kDeepBlue text-kPaper border-y border-kGold/20">
         <div class="max-w-[1400px] mx-auto px-8 lg:px-20">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-serif text-kGold mb-4">Expedition Routes</h2>
-                    <p class="text-kPaper/60 max-w-lg">Exclusive drop packages for extreme exoplanet explorers. Exo-suits included in all tiers.</p>
-                </div>
-                <div class="hidden md:block text-kGold text-6xl font-serif font-light opacity-50">03</div>
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-serif text-kGold mb-4">Expedition Routes</h2>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white/5 border border-white/10 p-8 rounded-flygo hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white/5 border border-white/10 p-8 rounded-flygo hover:-translate-y-2 transition-transform duration-300 reveal delay-100">
                     <p class="text-xs font-bold tracking-widest text-kGold uppercase mb-2">Route Alpha</p>
                     <h3 class="font-serif text-3xl mb-4 text-white">The Halo Drop</h3>
                     <ul class="text-sm text-kPaper/70 space-y-3 mb-8">
                         <li class="flex justify-between border-b border-white/10 pb-2"><span>Activity:</span> <strong>Orbital Skydiving</strong></li>
-                        <li class="flex justify-between border-b border-white/10 pb-2"><span>G-Force:</span> <strong>~3.5G</strong></li>
-                        <li class="flex justify-between pb-2"><span>Duration:</span> <strong>12 Hours</strong></li>
                     </ul>
-                    <button class="w-full py-4 border border-kGold text-kGold hover:bg-kGold hover:text-kDeepBlue transition-colors font-bold text-sm tracking-widest uppercase rounded-full">Reserve Drop</button>
+                    <button class="w-full py-4 border border-kGold text-kGold rounded-full">Reserve Drop</button>
                 </div>
 
-                <div class="bg-kGold border border-kGold p-8 rounded-flygo hover:-translate-y-2 transition-transform duration-300 text-kDeepBlue relative overflow-hidden">
-                    <div class="absolute top-4 right-6 bg-kDeepBlue text-kGold text-[10px] px-3 py-1 uppercase tracking-widest font-bold rounded-full">Popular</div>
+                <div class="bg-kGold border border-kGold p-8 rounded-flygo text-kDeepBlue relative overflow-hidden reveal delay-200">
                     <p class="text-xs font-bold tracking-widest uppercase mb-2 opacity-80">Route Beta</p>
                     <h3 class="font-serif text-3xl mb-4">Atmospheric Glide</h3>
                     <ul class="text-sm space-y-3 mb-8 opacity-90">
                         <li class="flex justify-between border-b border-kDeepBlue/20 pb-2"><span>Activity:</span> <strong>Wingsuit Flight</strong></li>
-                        <li class="flex justify-between border-b border-kDeepBlue/20 pb-2"><span>G-Force:</span> <strong>~5.0G</strong></li>
-                        <li class="flex justify-between pb-2"><span>Duration:</span> <strong>2 Days</strong></li>
                     </ul>
-                    <button class="w-full py-4 bg-kDeepBlue text-kGold hover:bg-white transition-colors font-bold text-sm tracking-widest uppercase rounded-full">Reserve Drop</button>
+                    <button class="w-full py-4 bg-kDeepBlue text-kGold rounded-full">Reserve Drop</button>
                 </div>
 
-                <div class="bg-white/5 border border-white/10 p-8 rounded-flygo hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white/5 border border-white/10 p-8 rounded-flygo hover:-translate-y-2 transition-transform duration-300 reveal delay-300">
                     <p class="text-xs font-bold tracking-widest text-kGold uppercase mb-2">Route Gamma</p>
                     <h3 class="font-serif text-3xl mb-4 text-white">Ice Core Trek</h3>
                     <ul class="text-sm text-kPaper/70 space-y-3 mb-8">
                         <li class="flex justify-between border-b border-white/10 pb-2"><span>Activity:</span> <strong>Surface Exploration</strong></li>
-                        <li class="flex justify-between border-b border-white/10 pb-2"><span>G-Force:</span> <strong>Maximum (8G)</strong></li>
-                        <li class="flex justify-between pb-2"><span>Duration:</span> <strong>1 Week</strong></li>
                     </ul>
-                    <button class="w-full py-4 border border-kGold text-kGold hover:bg-kGold hover:text-kDeepBlue transition-colors font-bold text-sm tracking-widest uppercase rounded-full">Reserve Drop</button>
+                    <button class="w-full py-4 border border-kGold text-kGold rounded-full">Reserve Drop</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="reviews" class="w-full px-8 lg:px-20 py-24 bg-kPaper">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-serif text-kDeepBlue mb-4">Explorer <span class="italic text-kGold">Transmissions</span></h2>
-            <p class="text-kDeepBlue/60 max-w-lg mx-auto">Feedback from pioneers who have survived the crushing gravity of HD 40307g.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="glass-panel p-8 rounded-[30px] border border-white flex flex-col">
-                <div class="text-kGold text-xl mb-4">★★★★★</div>
-                <p class="text-kDeepBlue/80 italic mb-8 flex-grow">"The Halo Drop was the most intense 12 hours of my life. You don't just see the planet; you feel it pulling you in."</p>
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-kDeepBlue overflow-hidden"><img src="https://i.pravatar.cc/100?img=11" alt="User" class="w-full h-full object-cover mix-blend-luminosity"></div>
-                    <div>
-                        <h4 class="font-bold text-sm text-kDeepBlue">Cmdr. James T.</h4>
-                        <p class="text-[10px] uppercase tracking-widest text-kDeepBlue/50">Route Alpha Vet</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="glass-panel p-8 rounded-[30px] border border-white flex flex-col">
-                <div class="text-kGold text-xl mb-4">★★★★★</div>
-                <p class="text-kDeepBlue/80 italic mb-8 flex-grow">"Gliding through the thick, golden clouds of HD 40307g is breathtaking. The 5G force is heavy on the chest, but the panoramic views are worth every credit."</p>
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-kSky overflow-hidden"><img src="https://i.pravatar.cc/100?img=44" alt="User" class="w-full h-full object-cover mix-blend-luminosity"></div>
-                    <div>
-                        <h4 class="font-bold text-sm text-kDeepBlue">Dr. Elena Rostova</h4>
-                        <p class="text-[10px] uppercase tracking-widest text-kDeepBlue/50">Astro-Biologist</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-panel p-8 rounded-[30px] border border-white flex flex-col">
-                <div class="text-kGold text-xl mb-4">★★★★☆</div>
-                <p class="text-kDeepBlue/80 italic mb-8 flex-grow">"The surface is brutal. 8 times Earth's mass makes lifting a foot feel like lifting a boulder. Only recommended for the absolute thrill-seekers."</p>
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-kGold overflow-hidden"><img src="https://i.pravatar.cc/100?img=33" alt="User" class="w-full h-full object-cover mix-blend-luminosity"></div>
-                    <div>
-                        <h4 class="font-bold text-sm text-kDeepBlue">Marcus Vance</h4>
-                        <p class="text-[10px] uppercase tracking-widest text-kDeepBlue/50">Extreme Tourist</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="logs" class="w-full px-8 lg:px-20 py-24 border-t border-kDeepBlue/10 relative">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div>
-                <h2 class="text-4xl md:text-5xl font-serif text-kDeepBlue mb-4">Mission <span class="italic text-kGold">Logs</span></h2>
-                <p class="text-kDeepBlue/60 max-w-lg">Latest updates, scientific findings, and survival guides from our control center.</p>
-            </div>
-            <a href="#" class="text-sm font-bold border-b border-kDeepBlue pb-1 hover:text-kGold hover:border-kGold transition-colors">View all logs -></a>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div class="group cursor-pointer">
-                <div class="w-full h-[300px] rounded-[30px] overflow-hidden mb-6 relative">
-                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop" alt="Log 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute top-4 left-4 bg-kPaper text-kDeepBlue text-[10px] px-3 py-1 uppercase tracking-widest font-bold rounded-full">Gear Setup</div>
-                </div>
-                <p class="text-kGold font-bold text-xs uppercase tracking-widest mb-2">Stardate 2046.8</p>
-                <h3 class="text-2xl font-serif font-bold text-kDeepBlue mb-3 group-hover:text-kGold transition-colors">Calibrating Exo-Suits for High-G Environments</h3>
-                <p class="text-kDeepBlue/70 text-sm leading-relaxed">Understanding the servo mechanics and pressure distribution required to keep humans functioning when gravity is working overtime.</p>
-            </div>
-
-            <div class="group cursor-pointer">
-                <div class="w-full h-[300px] rounded-[30px] overflow-hidden mb-6 relative">
-                    <img src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?q=80&w=1000&auto=format&fit=crop" alt="Log 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter contrast-125 sepia-[.3]">
-                    <div class="absolute top-4 left-4 bg-kPaper text-kDeepBlue text-[10px] px-3 py-1 uppercase tracking-widest font-bold rounded-full">Discovery</div>
-                </div>
-                <p class="text-kGold font-bold text-xs uppercase tracking-widest mb-2">Stardate 2046.9</p>
-                <h3 class="text-2xl font-serif font-bold text-kDeepBlue mb-3 group-hover:text-kGold transition-colors">The Golden Storms of the Equator</h3>
-                <p class="text-kDeepBlue/70 text-sm leading-relaxed">Recent probes have returned stunning visuals of massive, golden cloud formations swirling around HD 40307g's midsection.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact" class="bg-kDeepBlue text-kPaper pt-20 pb-10 px-8 lg:px-20 border-t-4 border-kGold">
-        <div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-16">
-            <div class="w-full md:w-1/3">
-                <span class="text-3xl font-serif font-black tracking-wider uppercase text-kPaper mb-6 block">
-                    Solaris<span class="text-kGold text-lg align-top">®</span>
-                </span>
-                <p class="text-kPaper/60 text-sm leading-relaxed">Pioneers in retro-futuristic exploration. We make the impossible gravity of the universe accessible to the bold.</p>
-            </div>
-            <div class="w-full md:w-1/3">
-                <h4 class="font-bold uppercase tracking-widest text-kGold mb-6 text-sm">Control Center</h4>
-                <ul class="space-y-3 text-sm text-kPaper/60">
-                    <li>Houston Sector, Earth</li>
-                    <li>COM-LINK: +1 (800) EXOPLANET</li>
-                    <li>FREQ: solaris@mission.com</li>
-                </ul>
-            </div>
-            <div class="w-full md:w-1/3 flex flex-col items-start md:items-end">
-                <h4 class="font-bold uppercase tracking-widest text-kGold mb-6 text-sm">Clearance</h4>
-                <button class="bg-kGold text-kDeepBlue px-8 py-3 rounded-full hover:bg-white transition-all font-bold text-sm">
-                    Request Manifest
-                </button>
-            </div>
-        </div>
-        <div class="text-center text-[10px] uppercase tracking-widest text-kPaper/40 font-mono border-t border-white/10 pt-8">
-            <p>&copy; 2046 Solaris Exostellar. Gravity is just a suggestion.</p>
-        </div>
+    <footer class="py-8 bg-kDeepBlue text-center border-t border-white/10 text-kGold/50 text-xs font-mono reveal">
+        <p>&copy; 2046 Solaris Exostellar. Gravity is just a suggestion.</p>
     </footer>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
